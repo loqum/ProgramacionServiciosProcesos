@@ -2,6 +2,7 @@ package com.rfm.main;
 
 import com.rfm.factory.Encriptador;
 import com.rfm.factory.FactoriaEncriptador;
+import com.rfm.utils.Constantes;
 
 import java.util.Scanner;
 
@@ -14,17 +15,17 @@ public class MainClass {
     String frase = null;
     String clave = null;
 
-    System.out.println("Introduce el algoritmo [cesar] o [vigenere]: ");
+    System.out.println(Constantes.getMensajeAlgoritmo());
     String algoritmo = scanner.nextLine();
 
     Encriptador encriptador = FactoriaEncriptador.getInstance(algoritmo);
 
-    System.out.println("Selecciona el tipo de operacion [cifrar] o [descifrar]: ");
+    System.out.println(Constantes.getMensajeOperacion());
     String operacion = scanner.nextLine();
 
     switch (operacion) {
 
-    case "cifrar":
+    case "1":
 
       System.out.println("Introduce una frase: ");
       frase = scanner.nextLine();
@@ -36,7 +37,7 @@ public class MainClass {
 
       break;
 
-    case "descifrar":
+    case "2":
 
       System.out.println("Introduce una frase: ");
       frase = scanner.nextLine();
