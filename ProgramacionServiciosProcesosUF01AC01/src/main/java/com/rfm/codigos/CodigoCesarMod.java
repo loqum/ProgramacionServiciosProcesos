@@ -1,9 +1,12 @@
 package com.rfm.codigos;
 
+import java.util.stream.IntStream;
+
 import org.apache.log4j.Logger;
 
 import com.rfm.factory.Encriptador;
 import com.rfm.utils.Constantes;
+import com.rfm.utils.Filters;
 
 public class CodigoCesarMod implements Encriptador {
 
@@ -11,10 +14,11 @@ public class CodigoCesarMod implements Encriptador {
   private static final int SIZE = Constantes.getAbecedario().length();
 
   /**
-   * En este método hay una pequeña modificación: a la clave que el usuario
-   * introduce se le suma el índice que ocupa la última letra de la frase
-   * introducida. Así, si el usuario introduce la frase [MADRID] y la clave [5],
-   * esta será finalmente [8], puesto que [5 + 3 = 8]
+   * En este metodo hay una pequeÃ±a modificacion: a la clave que el usuario
+   * introduce se le suma el numero primo mas cercano por debajo de la clave
+   * introducida por usuario. Asi, si el usuario introduce la clave [5], esta sera
+   * finalmente [8], puesto que 3 es el numero primo mas cercano a 5 por debajo de
+   * este numero.
    */
 
   @Override
@@ -23,10 +27,11 @@ public class CodigoCesarMod implements Encriptador {
     int posicionLetraCifrado = 0;
     int claveSecreta = 0;
 
+    claveSecreta = IntStream.rangeClosed(1, Integer.valueOf(clave)).filter(Filters::isPrime).max().getAsInt();
+
     for (int i = 0; i < frase.length(); i++) {
 
       posicionLetraCifrado = Constantes.getAbecedario().indexOf(frase.toUpperCase().charAt(i));
-      claveSecreta = Constantes.getAbecedario().indexOf(frase.toUpperCase().charAt(frase.length() - 1));
 
       try {
 
@@ -54,13 +59,14 @@ public class CodigoCesarMod implements Encriptador {
     for (int i = 0; i < frase.length(); i++) {
 
       posicionLetraCifrado = Constantes.getAbecedario().indexOf(frase.toUpperCase().charAt(i));
-      claveSecreta = Constantes.getAbecedario().indexOf(frase.toUpperCase().charAt(frase.length() - 1));
+
+      claveSecreta = IntStream.rangeClosed(1, Integer.valueOf(clave)).filter(Filters::isPrime).max().getAsInt();
 
       try {
 
         builder = posicionLetraCifrado >= 0
-            ? builder.append(
-                Constantes.getAbecedario().charAt((posicionLetraCifrado - Integer.parseInt(clave) - claveSecreta + SIZE) % SIZE))
+            ? builder.append(Constantes.getAbecedario()
+                .charAt((posicionLetraCifrado - Integer.parseInt(clave) - claveSecreta + SIZE) % SIZE))
             : builder.append(frase.toUpperCase().charAt(i));
 
       } catch (RuntimeException e) {
