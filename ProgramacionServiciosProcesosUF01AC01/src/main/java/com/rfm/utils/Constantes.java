@@ -9,14 +9,14 @@ public class Constantes {
   private static final String ABECEDARIO = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
 
   private static final String MENSAJE_ALGORITMO = 
-      "Introduce el código del algoritmo: "
+      "Introduce el codigo del algoritmo: "
       .concat("\n\n[1. Cesar]")
       .concat("\n[2. CesarMod]")
       .concat("\n[3. Vigenere]")
-      .concat("\n[3. VigenereMod]");
+      .concat("\n[4. VigenereMod]");
   
   private static final String MENSAJE_OPERACION =
-      "Introduce el código de la operacion: "
+      "Introduce el codigo de la operacion: "
       .concat("\n\n[1. Cifrar]")
       .concat("\n[2. Descifrar]");
 

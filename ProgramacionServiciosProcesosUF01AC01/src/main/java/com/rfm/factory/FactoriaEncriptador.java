@@ -3,6 +3,7 @@ package com.rfm.factory;
 import com.rfm.codigos.CodigoCesar;
 import com.rfm.codigos.CodigoCesarMod;
 import com.rfm.codigos.CodigoVigenere;
+import com.rfm.codigos.CodigoVigenereMod;
 
 public class FactoriaEncriptador {
 
@@ -23,7 +24,7 @@ public class FactoriaEncriptador {
       return new CodigoVigenere();
 
     case "4":
-      return new CodigoVigenere();
+      return new CodigoVigenereMod();
 
     default:
       throw new IllegalArgumentException("Introducido parámetro incorrecto.");

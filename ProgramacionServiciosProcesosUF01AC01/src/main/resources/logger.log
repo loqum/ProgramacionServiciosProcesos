@@ -1,0 +1,120 @@
+2019-02-21 19:30:44 INFO  MainClass:21 - Introduce el código del algoritmo: 
+
+[1. Cesar]
+[2. CesarMod]
+[3. Vigenere]
+[3. VigenereMod]
+2019-02-21 19:30:48 INFO  MainClass:26 - Introduce el código de la operacion: 
+
+[1. Cifrar]
+[2. Descifrar]
+2019-02-21 19:30:51 INFO  MainClass:33 - Introduce una frase: 
+2019-02-21 19:30:53 INFO  MainClass:36 - Introduce un número: 
+2019-02-21 19:30:56 INFO  MainClass:39 - Resultado: QYUK
+2019-02-21 19:57:39 INFO  MainClass:21 - Introduce el codigo del algoritmo: 
+
+[1. Cesar]
+[2. CesarMod]
+[3. Vigenere]
+[3. VigenereMod]
+2019-02-21 19:57:43 INFO  MainClass:26 - Introduce el codigo de la operacion: 
+
+[1. Cifrar]
+[2. Descifrar]
+2019-02-21 19:57:45 INFO  MainClass:33 - Introduce una frase: 
+2019-02-21 19:57:49 INFO  MainClass:36 - Introduce un numero: 
+2019-02-21 19:57:55 INFO  MainClass:39 - Resultado: WEUL
+2019-02-21 19:59:10 INFO  MainClass:21 - Introduce el codigo del algoritmo: 
+
+[1. Cesar]
+[2. CesarMod]
+[3. Vigenere]
+[3. VigenereMod]
+2019-02-21 19:59:32 INFO  MainClass:21 - Introduce el codigo del algoritmo: 
+
+[1. Cesar]
+[2. CesarMod]
+[3. Vigenere]
+[4. VigenereMod]
+2019-02-21 19:59:40 INFO  MainClass:26 - Introduce el codigo de la operacion: 
+
+[1. Cifrar]
+[2. Descifrar]
+2019-02-21 19:59:41 INFO  MainClass:33 - Introduce una frase: 
+2019-02-21 19:59:43 INFO  MainClass:36 - Introduce una clave: 
+2019-02-21 20:01:28 INFO  MainClass:21 - Introduce el codigo del algoritmo: 
+
+[1. Cesar]
+[2. CesarMod]
+[3. Vigenere]
+[4. VigenereMod]
+2019-02-21 20:01:29 INFO  MainClass:26 - Introduce el codigo de la operacion: 
+
+[1. Cifrar]
+[2. Descifrar]
+2019-02-21 20:01:30 INFO  MainClass:33 - Introduce una frase: 
+2019-02-21 20:01:35 INFO  MainClass:36 - Introduce una clave: 
+2019-02-21 20:02:03 ERROR CodigoVigenereMod:35 - Error: String index out of range: -1
+2019-02-21 20:02:13 INFO  MainClass:21 - Introduce el codigo del algoritmo: 
+
+[1. Cesar]
+[2. CesarMod]
+[3. Vigenere]
+[4. VigenereMod]
+2019-02-21 20:02:15 INFO  MainClass:26 - Introduce el codigo de la operacion: 
+
+[1. Cifrar]
+[2. Descifrar]
+2019-02-21 20:02:16 INFO  MainClass:33 - Introduce una frase: 
+2019-02-21 20:02:21 INFO  MainClass:36 - Introduce una clave: 
+2019-02-21 20:03:15 INFO  MainClass:39 - Resultado: HZVO
+2019-02-21 20:04:21 INFO  MainClass:21 - Introduce el codigo del algoritmo: 
+
+[1. Cesar]
+[2. CesarMod]
+[3. Vigenere]
+[4. VigenereMod]
+2019-02-21 20:04:23 INFO  MainClass:26 - Introduce el codigo de la operacion: 
+
+[1. Cifrar]
+[2. Descifrar]
+2019-02-21 20:04:24 INFO  MainClass:33 - Introduce una frase: 
+2019-02-21 20:04:27 INFO  MainClass:36 - Introduce una clave: 
+2019-02-21 20:05:01 INFO  MainClass:39 - Resultado: HZVO
+2019-02-21 20:06:16 INFO  MainClass:21 - Introduce el codigo del algoritmo: 
+
+[1. Cesar]
+[2. CesarMod]
+[3. Vigenere]
+[4. VigenereMod]
+2019-02-21 20:06:17 INFO  MainClass:26 - Introduce el codigo de la operacion: 
+
+[1. Cifrar]
+[2. Descifrar]
+2019-02-21 20:06:18 INFO  MainClass:45 - Introduce una frase: 
+2019-02-21 20:06:26 INFO  MainClass:21 - Introduce el codigo del algoritmo: 
+
+[1. Cesar]
+[2. CesarMod]
+[3. Vigenere]
+[4. VigenereMod]
+2019-02-21 20:06:32 INFO  MainClass:26 - Introduce el codigo de la operacion: 
+
+[1. Cifrar]
+[2. Descifrar]
+2019-02-21 20:06:33 INFO  MainClass:33 - Introduce una frase: 
+2019-02-21 20:06:35 INFO  MainClass:36 - Introduce una clave: 
+2019-02-21 20:06:45 INFO  MainClass:39 - Resultado: VQZC
+2019-02-21 20:06:51 INFO  MainClass:21 - Introduce el codigo del algoritmo: 
+
+[1. Cesar]
+[2. CesarMod]
+[3. Vigenere]
+[4. VigenereMod]
+2019-02-21 20:06:52 INFO  MainClass:26 - Introduce el codigo de la operacion: 
+
+[1. Cifrar]
+[2. Descifrar]
+2019-02-21 20:06:53 INFO  MainClass:45 - Introduce una frase: 
+2019-02-21 20:06:57 INFO  MainClass:48 - Introduce una clave: 
+2019-02-21 20:07:00 INFO  MainClass:51 - Resultado: HOLA
