@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 import com.rfm.factory.Encriptador;
 import com.rfm.utils.Constantes;
+import com.rfm.utils.Validaciones;
 
 public class CodigoCesar implements Encriptador {
 
@@ -29,25 +30,29 @@ public class CodigoCesar implements Encriptador {
     StringBuilder builder = new StringBuilder();
     int posicionLetraCifrado = 0;
 
-    for (int i = 0; i < frase.length(); i++) {
+    if (Validaciones.isNumeric(clave)) {
 
-      posicionLetraCifrado = Constantes.getAbecedario().indexOf(frase.toUpperCase().charAt(i));
+      for (int i = 0; i < frase.length(); i++) {
 
-      try {
+        posicionLetraCifrado = Constantes.getAbecedario().indexOf(frase.toUpperCase().charAt(i));
 
-        builder = posicionLetraCifrado >= 0
-            ? builder.append(
-                Constantes.getAbecedario().charAt((posicionLetraCifrado + Integer.parseInt(clave)) % SIZE))
-            : builder.append(frase.toUpperCase().charAt(i));
+        try {
 
-      } catch (RuntimeException e) {
-        LOG.error("Error: " + e.getLocalizedMessage());
-        throw e;
+          builder = posicionLetraCifrado >= 0
+              ? builder.append(Constantes.getAbecedario()
+                  .charAt((posicionLetraCifrado + Integer.parseInt(clave)) % SIZE))
+              : builder.append(frase.toUpperCase().charAt(i));
+
+        } catch (RuntimeException e) {
+          LOG.error("Error: " + e.getLocalizedMessage());
+          throw e;
+        }
+
       }
-
     }
 
     return builder.toString();
+
   }
 
   /**
@@ -67,23 +72,26 @@ public class CodigoCesar implements Encriptador {
     StringBuilder builder = new StringBuilder();
     int posicionLetraCifrado = 0;
 
-    for (int i = 0; i < frase.length(); i++) {
+    if (Validaciones.isNumeric(clave)) {
 
-      posicionLetraCifrado = Constantes.getAbecedario().indexOf(frase.toUpperCase().charAt(i));
+      for (int i = 0; i < frase.length(); i++) {
 
-      try {
+        posicionLetraCifrado = Constantes.getAbecedario().indexOf(frase.toUpperCase().charAt(i));
 
-        builder = posicionLetraCifrado >= 0
-            ? builder.append(Constantes.getAbecedario()
-                .charAt((posicionLetraCifrado - Integer.parseInt(clave) + SIZE) % SIZE))
-            : builder.append(frase.toUpperCase().charAt(i));
+        try {
 
-      } catch (RuntimeException e) {
+          builder = posicionLetraCifrado >= 0
+              ? builder.append(Constantes.getAbecedario()
+                  .charAt((posicionLetraCifrado - Integer.parseInt(clave) + SIZE) % SIZE))
+              : builder.append(frase.toUpperCase().charAt(i));
 
-        LOG.error("Error: " + e.getLocalizedMessage());
-        throw e;
+        } catch (RuntimeException e) {
+
+          LOG.error("Error: " + e.getLocalizedMessage());
+          throw e;
+        }
+
       }
-
     }
 
     return builder.toString();

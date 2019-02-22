@@ -5,9 +5,9 @@ import com.rfm.codigos.CodigoCesarMod;
 import com.rfm.codigos.CodigoVigenere;
 import com.rfm.codigos.CodigoVigenereMod;
 
-public class FactoriaEncriptador {
+public class FactoryEncriptador {
 
-  private FactoriaEncriptador() {
+  private FactoryEncriptador() {
 
   }
 
