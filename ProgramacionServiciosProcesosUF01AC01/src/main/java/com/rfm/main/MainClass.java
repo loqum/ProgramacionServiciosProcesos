@@ -92,10 +92,8 @@ public class MainClass {
 
       EncriptadorArchivo cifrarArchivo = FactoryEncriptadorArchivo.getInstance();
 
-      encriptador.cifrar(cifrarArchivo.leerArchivo(respuestaNombreArchivo), clave);
-
-      LOG.info("Resultado: "
-          + encriptador.cifrar(cifrarArchivo.leerArchivo(respuestaNombreArchivo), clave));
+      LOG.info(
+          "Resultado: " + encriptador.cifrar(cifrarArchivo.leerArchivo(respuestaNombreArchivo.concat(".txt")), clave));
 
       break;
 
@@ -109,10 +107,8 @@ public class MainClass {
 
       EncriptadorArchivo descifrarArchivo = FactoryEncriptadorArchivo.getInstance();
 
-      encriptador.descifrar(descifrarArchivo.leerArchivo(respuestaNombreArchivo), clave);
-
       LOG.info("Resultado: "
-          + encriptador.descifrar(descifrarArchivo.leerArchivo(respuestaNombreArchivo), clave));
+          + encriptador.descifrar(descifrarArchivo.leerArchivo(respuestaNombreArchivo.concat(".txt")), clave));
 
       break;
 

@@ -32,7 +32,7 @@ public class CifradoTxt implements EncriptadorArchivo {
 
     try (Stream<String> stream = Files.lines(Paths.get(nombreArchivo))) {
 
-      resultado = stream.collect(Collectors.joining(", "));
+      resultado = stream.collect(Collectors.joining(" "));
 
     } catch (IOException e) {
 

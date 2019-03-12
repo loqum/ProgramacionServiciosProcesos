@@ -4,6 +4,10 @@ import org.apache.log4j.Logger;
 
 public class Validaciones {
 
+  private Validaciones() {
+    throw new IllegalStateException("Utility class");
+  }
+
   private static final Logger LOG = Logger.getLogger(Validaciones.class);
 
   public static boolean isNumeric(String cadena) {
