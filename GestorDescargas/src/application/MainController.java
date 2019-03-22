@@ -1,23 +1,34 @@
 package application;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ResourceBundle;
+
+import com.rfm.utils.Estado;
+import com.rfm.utils.Utils;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
 
 public class MainController implements Initializable {
 
   @FXML
   private TextField inputUrl;
+  
+  @FXML
+  private TextArea inputListaDescargas;
+  
+  @FXML
+  private Button botonDescargar;
+  
+  @FXML
+  private Button botonBorrar;
+  
+  private StringBuilder sb = new StringBuilder();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -25,44 +36,39 @@ public class MainController implements Initializable {
   }
 
   public void descargar(ActionEvent actionEvent) {
-    try {
 
-      URL url = new URL(inputUrl.getText());
-      URLConnection urlConnection = url.openConnection();
+    if (!inputUrl.getText().equals("")) {
 
-      InputStream inputStream = urlConnection.getInputStream();
-      
-      FileOutputStream fileOutputStream = new FileOutputStream("C:\\Users\\ruben\\eclipse-workspace\\GestorDescargas\\foto.html");
-      
-      byte[]array = new byte[1000];
-      int leido = inputStream.read(array);
-      
-      while (leido > 0) {
-        fileOutputStream.write(array, 0, leido);
-        leido = inputStream.read(array);
+      URL url;
+      String nombreFichero = Utils.abrirArchivoAction(inputUrl.getText());
+
+      try {
+        url = new URL(inputUrl.getText());
+        TareaDescarga tareaDescarga = new TareaDescarga(url, nombreFichero);
+
+        tareaDescarga.execute();
+        
+        sb.append(url.getFile()).append("\n");
+        
+        inputListaDescargas.setText(sb.toString());
+        
+      } catch (MalformedURLException e) {
+
+        e.printStackTrace();
+        
+      } finally {
+        inputUrl.setText(Estado.BLANK.getValue());
       }
       
-      inputStream.close();
-      fileOutputStream.close();
-
-    } catch (Exception e) {
-      e.printStackTrace();
     }
 
   }
   
-  public void abrirArchivoAction(ActionEvent event) {
-    FileChooser chooser = new FileChooser();
-    
-    chooser.getExtensionFilters().addAll(
-        new ExtensionFilter("TXT Files", "*.txt"), 
-        new ExtensionFilter("PDF Files", "*.pdf"),
-        new ExtensionFilter("JPEG Files", "*.jpeg"),
-        new ExtensionFilter("HTML Files", "*.html"),
-        new ExtensionFilter("GIF Files", "*.gif"));
-    
-    File selectedFile = chooser.showOpenDialog(null);
-
+  public void borrarListaDescargas(ActionEvent actionEvent) {
+    inputListaDescargas.setText(Estado.BLANK.getValue());
+    sb.setLength(0);
   }
+
+  
 
 }
