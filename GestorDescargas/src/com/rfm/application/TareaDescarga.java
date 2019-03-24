@@ -1,4 +1,4 @@
-package application;
+package com.rfm.application;
 
 import java.io.FileOutputStream;
 import java.io.InputStream;
