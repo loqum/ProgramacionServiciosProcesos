@@ -1,13 +1,20 @@
 package com.rfm.application;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.prefs.BackingStoreException;
+import java.util.prefs.Preferences;
+
+import org.apache.log4j.Logger;
+
 import com.rfm.utils.Constants;
 import com.rfm.utils.Factory;
 import com.rfm.utils.FactoryMethod;
 import com.rfm.utils.Utils;
-
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,8 +25,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-
-import org.apache.log4j.Logger;
+import javafx.stage.DirectoryChooser;
 
 public class MainController implements Initializable {
 
@@ -33,7 +39,7 @@ public class MainController implements Initializable {
 
   @FXML
   private Button botonDescargar;
-  
+
   @FXML
   private Button botonDescargarLista;
 
@@ -48,6 +54,9 @@ public class MainController implements Initializable {
 
   @FXML
   private MenuItem botonAbrirArchivo;
+
+  @FXML
+  private MenuItem botonRutaGuardado;
 
   @FXML
   private ProgressBar barraProgreso;
@@ -88,12 +97,12 @@ public class MainController implements Initializable {
         indicadorProgreso.progressProperty().add(tareaDescarga.getProgress());
 
         threadDescarga = new Thread(tareaDescarga);
+
         threadDescarga.start();
 
         indiceNombreArchivo = nombreFichero.lastIndexOf('\\');
-        sb.append("Archivo ".concat("'").concat(nombreFichero.substring(indiceNombreArchivo + 1))
-            .concat("'").concat(" descargado con Ã©xito en ").concat("'").concat(nombreFichero)
-            .concat("'")).append("\n");
+        sb.append("Archivo ".concat("'").concat(nombreFichero.substring(indiceNombreArchivo + 1)).concat("'")
+            .concat(" descargado con éxito en ").concat("'").concat(nombreFichero).concat("'")).append("\n");
 
         inputListaDescargas.setText(sb.toString());
 
@@ -103,9 +112,8 @@ public class MainController implements Initializable {
       } finally {
 
         inputUrl.setText(Constants.BLANK.getValue());
-        LOG.info("Archivo ".concat("'").concat(nombreFichero.substring(indiceNombreArchivo + 1))
-            .concat("'").concat(" descargado con Ã©xito en ").concat("'").concat(nombreFichero)
-            .concat("'"));
+        LOG.info("Archivo ".concat("'").concat(nombreFichero.substring(indiceNombreArchivo + 1)).concat("'")
+            .concat(" descargado con éxito en ").concat("'").concat(nombreFichero).concat("'"));
       }
 
     }
@@ -132,5 +140,71 @@ public class MainController implements Initializable {
     }
 
   }
+
+  public File seleccionarDirectorio() {
+    DirectoryChooser directoryChooser = new DirectoryChooser();
+    directoryChooser.setTitle("Selecciona un directorio...");
+    File dir = directoryChooser.showDialog(null);
+
+    try {
+      
+      Preferences preferences = Preferences.userNodeForPackage(MainController.class);
+      preferences.clear();
+      preferences.put("directorio", dir.getAbsolutePath());
+      
+    } catch (BackingStoreException e) {
+      LOG.error("Error al guardar las preferencias: " + e.getMessage());
+    }
+
+    return dir;
+  }
+  
+//  public void descargarLista(ActionEvent actionEvent) {
+//    if (!inputListaDescargas.getText().equals("")) {
+//
+//      barraProgreso.setProgress(0);
+//      indicadorProgreso.setProgress(0);
+//
+//      List<URL> urlList = new ArrayList<URL>();
+//      int indiceNombreArchivo = 0;
+//      Thread threadDescarga = null;
+//
+//      int indiceUrl = inputUrl.getText().lastIndexOf('/');
+//
+//      String nombreFichero = Utils.guardarArchivo(inputUrl.getText().substring(indiceUrl + 1));
+//
+//      try {
+//        
+//        urlList.add(new URL(inputListaDescargas.getText()));
+//        TareaDescarga tareaDescarga = new TareaDescarga(url, nombreFichero);
+//
+//        barraProgreso.progressProperty().unbind();
+//        barraProgreso.progressProperty().add(tareaDescarga.getProgress());
+//
+//        indicadorProgreso.progressProperty().unbind();
+//        indicadorProgreso.progressProperty().add(tareaDescarga.getProgress());
+//
+//        threadDescarga = new Thread(tareaDescarga);
+//
+//        threadDescarga.start();
+//
+//        indiceNombreArchivo = nombreFichero.lastIndexOf('\\');
+//        sb.append("Archivo ".concat("'").concat(nombreFichero.substring(indiceNombreArchivo + 1)).concat("'")
+//            .concat(" descargado con éxito en ").concat("'").concat(nombreFichero).concat("'")).append("\n");
+//
+//        inputListaDescargas.setText(sb.toString());
+//
+//      } catch (MalformedURLException e) {
+//        LOG.error("Error: " + e.getMessage());
+//
+//      } finally {
+//
+//        inputUrl.setText(Constants.BLANK.getValue());
+//        LOG.info("Archivo ".concat("'").concat(nombreFichero.substring(indiceNombreArchivo + 1)).concat("'")
+//            .concat(" descargado con éxito en ").concat("'").concat(nombreFichero).concat("'"));
+//      }
+//
+//    }
+//  }
 
 }

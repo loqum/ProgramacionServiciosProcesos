@@ -84,6 +84,8 @@
           <Menu mnemonicParsing="false" text="Archivo">
             <items>
               <MenuItem fx:id="botonAbrirArchivo" mnemonicParsing="false" onAction="#abrirArchivoAction" text="Abrir archivo..." />
+                  <MenuItem fx:id="botonRutaGuardado" mnemonicParsing="false" onAction="#seleccionarDirectorio" text="Ruta de guardado predeterminado" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
               <MenuItem fx:id="botonCerrarApp" mnemonicParsing="false" onAction="#cerrarAppAction" text="Cerrar" />
             </items>
           </Menu>
