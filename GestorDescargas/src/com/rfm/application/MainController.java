@@ -18,8 +18,6 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 import org.apache.log4j.Logger;
 
@@ -35,6 +33,9 @@ public class MainController implements Initializable {
 
   @FXML
   private Button botonDescargar;
+  
+  @FXML
+  private Button botonDescargarLista;
 
   @FXML
   private Button botonCancelar;
