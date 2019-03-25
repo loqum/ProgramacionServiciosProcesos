@@ -1,31 +1,31 @@
 package com.rfm.application;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Optional;
-import java.util.ResourceBundle;
-
 import com.rfm.utils.Constants;
-import com.rfm.utils.Estado;
+import com.rfm.utils.Factory;
+import com.rfm.utils.FactoryMethod;
 import com.rfm.utils.Utils;
 
-import javafx.concurrent.WorkerStateEvent;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.StageStyle;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+import org.apache.log4j.Logger;
 
 public class MainController implements Initializable {
+
+  private static final Logger LOG = Logger.getLogger(MainController.class);
 
   @FXML
   private TextField inputUrl;
@@ -46,6 +46,9 @@ public class MainController implements Initializable {
   private MenuItem botonCerrarApp;
 
   @FXML
+  private MenuItem botonAbrirArchivo;
+
+  @FXML
   private ProgressBar barraProgreso;
 
   @FXML
@@ -62,13 +65,16 @@ public class MainController implements Initializable {
 
     if (!inputUrl.getText().equals("")) {
 
-//      botonDescargar.setDisable(true);
       barraProgreso.setProgress(0);
       indicadorProgreso.setProgress(0);
-      botonCancelar.setDisable(false);
 
       URL url;
-      String nombreFichero = Utils.abrirArchivoAction(inputUrl.getText());
+      int indiceNombreArchivo = 0;
+      Thread threadDescarga = null;
+
+      int indiceUrl = inputUrl.getText().lastIndexOf('/');
+
+      String nombreFichero = Utils.guardarArchivo(inputUrl.getText().substring(indiceUrl + 1));
 
       try {
         url = new URL(inputUrl.getText());
@@ -80,21 +86,25 @@ public class MainController implements Initializable {
         indicadorProgreso.progressProperty().unbind();
         indicadorProgreso.progressProperty().add(tareaDescarga.getProgress());
 
-        // Start the Task.
-        new Thread(tareaDescarga).start();
+        threadDescarga = new Thread(tareaDescarga);
+        threadDescarga.start();
 
-//        tareaDescarga.execute();
-
-        sb.append(url.getFile()).append("\n");
+        indiceNombreArchivo = nombreFichero.lastIndexOf('\\');
+        sb.append("Archivo ".concat("'").concat(nombreFichero.substring(indiceNombreArchivo + 1))
+            .concat("'").concat(" descargado con éxito en ").concat("'").concat(nombreFichero)
+            .concat("'")).append("\n");
 
         inputListaDescargas.setText(sb.toString());
 
       } catch (MalformedURLException e) {
-
-        e.printStackTrace();
+        LOG.error("Error: " + e.getMessage());
 
       } finally {
-        inputUrl.setText(Estado.BLANK.getValue());
+
+        inputUrl.setText(Constants.BLANK.getValue());
+        LOG.info("Archivo ".concat("'").concat(nombreFichero.substring(indiceNombreArchivo + 1))
+            .concat("'").concat(" descargado con éxito en ").concat("'").concat(nombreFichero)
+            .concat("'"));
       }
 
     }
@@ -102,21 +112,22 @@ public class MainController implements Initializable {
   }
 
   public void borrarListaDescargas() {
-    inputListaDescargas.setText(Estado.BLANK.getValue());
-    sb.setLength(0);
+    Utils.borrarTextArea(inputListaDescargas, sb);
   }
 
-  public void cerrarApp() {
-    Alert alert = new Alert(AlertType.CONFIRMATION);
-    alert.setTitle(Constants.getTituloVentanaConfirmacion());
-    alert.setHeaderText(Constants.getEncabezadoVentanaConfirmacion());
-    alert.setContentText(Constants.getContenidoVentanaConfirmacion());
-    alert.initStyle(StageStyle.UTILITY);
+  public void cerrarAppAction() {
+    Utils.ventanaConfirmacion();
+  }
 
-    Optional<ButtonType> result = alert.showAndWait();
+  public void abrirArchivoAction() {
 
-    if (result.get() == ButtonType.OK) {
-      System.exit(0);
+    try (Factory factory = FactoryMethod.getInstance()) {
+
+      inputListaDescargas.setText(factory.readFile(Utils.abrirArchivo()));
+
+    } catch (Exception e) {
+
+      LOG.error("Error al abrir o leer el archivo: " + e.getMessage());
     }
 
   }

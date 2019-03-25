@@ -1,25 +1,20 @@
 package com.rfm.utils;
 
-public class Constants {
+public enum Constants {
+  
+  BLANK(""),
+  TITULO_VENTANA_CONFIRMACION("Ventana de confirmaciÃ³n"),
+  ENCABEZADO_VENTANA_CONFIRMACION("AtenciÃ³n!"),
+  CONTENIDO_VENTANA_CONFIRMACION("Â¿EstÃ¡s seguro de que quieres salir del programa?");
 
-  private Constants() {
-
+  private final String value;
+  
+  Constants(String value) {
+    this.value = value;
   }
 
-  private static final String TITULO_VENTANA_CONFIRMACION = "Ventana de confirmación";
-  private static final String ENCABEZADO_VENTANA_CONFIRMACION = "Atención!";
-  private static final String CONTENIDO_VENTANA_CONFIRMACION = "¿Estás seguro de que quieres salir del programa?";
-
-  public static String getTituloVentanaConfirmacion() {
-    return TITULO_VENTANA_CONFIRMACION;
-  }
-
-  public static String getEncabezadoVentanaConfirmacion() {
-    return ENCABEZADO_VENTANA_CONFIRMACION;
-  }
-
-  public static String getContenidoVentanaConfirmacion() {
-    return CONTENIDO_VENTANA_CONFIRMACION;
+  public String getValue() {
+    return value;
   }
 
 }
