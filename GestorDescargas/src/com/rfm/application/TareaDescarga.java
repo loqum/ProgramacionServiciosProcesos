@@ -1,6 +1,5 @@
 package com.rfm.application;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URL;
@@ -8,7 +7,7 @@ import java.net.URLConnection;
 
 import javafx.concurrent.Task;
 
-public class TareaDescarga extends Task<File> {
+public class TareaDescarga extends Task<Void> {
 
   private URL url;
   private String nombreFichero;
@@ -19,7 +18,7 @@ public class TareaDescarga extends Task<File> {
   }
 
   @Override
-  protected File call() throws Exception {
+  protected Void call() throws Exception {
     InputStream inputStream = null;
     FileOutputStream fileOutputStream = null;
 

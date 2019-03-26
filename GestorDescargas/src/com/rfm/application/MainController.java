@@ -17,7 +17,9 @@ import com.rfm.utils.Factory;
 import com.rfm.utils.FactoryMethod;
 import com.rfm.utils.Utils;
 
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -71,6 +73,8 @@ public class MainController implements Initializable {
 
   private StringBuilder sb = new StringBuilder();
 
+  private TareaDescarga tareaDescarga;
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
@@ -85,7 +89,6 @@ public class MainController implements Initializable {
 
       URL url;
       int indiceNombreArchivo = 0;
-      Thread threadDescarga = null;
 
       int indiceUrl = inputUrl.getText().lastIndexOf('/');
 
@@ -93,17 +96,25 @@ public class MainController implements Initializable {
 
       try {
         url = new URL(inputUrl.getText());
-        TareaDescarga tareaDescarga = new TareaDescarga(url, nombreFichero);
+        tareaDescarga = new TareaDescarga(url, nombreFichero);
 
         barraProgreso.progressProperty().unbind();
-        barraProgreso.progressProperty().add(tareaDescarga.getProgress());
-
         indicadorProgreso.progressProperty().unbind();
-        indicadorProgreso.progressProperty().add(tareaDescarga.getProgress());
 
-        threadDescarga = new Thread(tareaDescarga);
+        barraProgreso.progressProperty().add(tareaDescarga.progressProperty());
+        indicadorProgreso.progressProperty().add(tareaDescarga.progressProperty());
 
-        threadDescarga.start();
+        tareaDescarga.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+            new EventHandler<WorkerStateEvent>() {
+
+              @Override
+              public void handle(WorkerStateEvent t) {
+                tareaDescarga.getValue();
+              }
+
+            });
+
+        new Thread(tareaDescarga).start();
 
         indiceNombreArchivo = nombreFichero.lastIndexOf('\\');
         sb.append("Archivo ".concat("'").concat(nombreFichero.substring(indiceNombreArchivo + 1))
@@ -117,10 +128,14 @@ public class MainController implements Initializable {
 
       } finally {
 
-        inputUrl.setText(Constants.BLANK.getValue());
-        LOG.info("Archivo ".concat("'").concat(nombreFichero.substring(indiceNombreArchivo + 1))
-            .concat("'").concat(" descargado con �xito en ").concat("'").concat(nombreFichero)
-            .concat("'"));
+        if (tareaDescarga.isDone()) {
+          inputUrl.setText(Constants.BLANK.getValue());
+
+          LOG.info("Archivo ".concat("'").concat(nombreFichero.substring(indiceNombreArchivo + 1))
+              .concat("'").concat(" descargado con �xito en ").concat("'").concat(nombreFichero)
+              .concat("'"));
+        }
+
       }
 
     }
@@ -209,7 +224,7 @@ public class MainController implements Initializable {
   }
 
   public void cancelarDescarga(ActionEvent actionEvent) {
-    
+
   }
 
 }
