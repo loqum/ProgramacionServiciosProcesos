@@ -10,6 +10,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 
+/**
+ * @author Ruben Fernandez Moreno
+ */
+
 public class Main extends Application {
 
   private static final Logger LOG = Logger.getLogger(Main.class);
@@ -23,7 +27,7 @@ public class Main extends Application {
       scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
       primaryStage.setScene(scene);
       primaryStage.setResizable(false);
-      primaryStage.setTitle("R-Downloader");
+      primaryStage.setTitle("RFM-Downloader");
       primaryStage.getIcons()
           .add(new Image(ClassLoader.getSystemResourceAsStream("resources/icon.png")));
       primaryStage.show();

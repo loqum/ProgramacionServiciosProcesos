@@ -1,15 +1,21 @@
 package com.rfm.utils;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Alert.AlertType;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.StageStyle;
 import javafx.stage.FileChooser.ExtensionFilter;
+
+/**
+ * @author Ruben Fernandez Moreno
+ */
 
 public class Utils {
 
@@ -48,17 +54,36 @@ public class Utils {
 
     Optional<ButtonType> result = alert.showAndWait();
 
-    if (result.get() == ButtonType.OK) {
+    if (result.isPresent() && result.get() == ButtonType.OK) {
       System.exit(0);
     }
 
+  }
+
+  public static void ventanaAlerta() {
+    Alert alert = new Alert(AlertType.WARNING);
+    alert.setTitle(Constants.TITULO_VENTANA_ALERTA.getValue());
+    alert.setHeaderText(Constants.ENCABEZADO_VENTANA_ALERTA.getValue());
+    alert.setContentText(Constants.CONTENIDO_VENTANA_ALERTA.getValue());
+    alert.initStyle(StageStyle.UTILITY);
+    alert.showAndWait();
   }
 
   public static void borrarTextArea(TextArea textArea, StringBuilder stringBuilder) {
     textArea.setText(Constants.BLANK.getValue());
     stringBuilder.setLength(0);
   }
-  
-  
+
+  public static String capturarEnlace(String enlace) {
+    return Stream.of(enlace.split("\n")).skip(2).collect(Collectors.joining());
+  }
+
+  public static long contarEnlaces(String enlace) {
+    return Stream.of(enlace.split("\n")).count();
+  }
+
+  public static List<String> agregarEnlacesList(String enlaces) {
+    return Stream.of(enlaces.split("\n")).collect(Collectors.toList());
+  }
 
 }

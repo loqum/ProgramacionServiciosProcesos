@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -35,6 +36,21 @@ public class FactoryTxt implements Factory, Serializable {
   @Override
   public void close() throws Exception {
     LOG.info("Cerrando");
+
+  }
+
+  @Override
+  public List<?> readFilesList(String fileName) throws IOException {
+
+    try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
+
+      return stream.collect(Collectors.toList());
+
+    } catch (IOException e) {
+
+      LOG.error("Error al leer el archivo: " + e.getMessage());
+      throw e;
+    }
 
   }
 

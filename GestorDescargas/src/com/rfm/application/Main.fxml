@@ -60,7 +60,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="botonCancelar" cancelButton="true" layoutX="426.0" layoutY="117.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" GridPane.columnIndex="9" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Button fx:id="botonCancelar" cancelButton="true" layoutX="426.0" layoutY="117.0" mnemonicParsing="false" onAction="#cancelarDescarga" prefHeight="30.0" prefWidth="30.0" GridPane.columnIndex="9" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
                      <image>
@@ -68,7 +68,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="botonDescargarLista" layoutX="389.0" layoutY="115.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" GridPane.columnIndex="10" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+            <Button fx:id="botonDescargarLista" layoutX="389.0" layoutY="115.0" mnemonicParsing="false" onAction="#descargarLista" prefHeight="30.0" prefWidth="30.0" GridPane.columnIndex="10" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
                      <image>
