@@ -89,7 +89,6 @@ public class MainController implements Initializable {
       indicadorProgreso.setProgress(0);
 
       URL url;
-      int indiceNombreArchivo = 0;
 
       int indiceUrl = inputUrl.getText().lastIndexOf('/');
 
@@ -112,30 +111,27 @@ public class MainController implements Initializable {
               public void handle(WorkerStateEvent t) {
                 barraProgreso.progressProperty().unbind();
                 indicadorProgreso.progressProperty().unbind();
+                inputUrl.setText(Constants.BLANK.getValue());
+
+                sb.append("Archivo ".concat("'")
+                    .concat(nombreFichero.substring(nombreFichero.lastIndexOf('\\') + 1))
+                    .concat("'").concat(" descargado con éxito en ").concat("'")
+                    .concat(nombreFichero).concat("'")).append("\n");
+
+                inputListaDescargas.setText(sb.toString());
+
+                LOG.info("Archivo ".concat("'")
+                    .concat(nombreFichero.substring(nombreFichero.lastIndexOf('\\') + 1))
+                    .concat("'").concat(" descargado con �xito en ").concat("'")
+                    .concat(nombreFichero).concat("'"));
               }
             });
 
         new Thread(tareaDescarga).start();
 
-        indiceNombreArchivo = nombreFichero.lastIndexOf('\\');
-
       } catch (MalformedURLException e) {
         LOG.error("Error: " + e.getMessage());
 
-      }
-
-      if (tareaDescarga.getState() == State.SUCCEEDED) {
-        inputUrl.setText(Constants.BLANK.getValue());
-
-        sb.append("Archivo ".concat("'").concat(nombreFichero.substring(indiceNombreArchivo + 1))
-            .concat("'").concat(" descargado con éxito en ").concat("'").concat(nombreFichero)
-            .concat("'")).append("\n");
-
-        inputListaDescargas.setText(sb.toString());
-
-        LOG.info("Archivo ".concat("'").concat(nombreFichero.substring(indiceNombreArchivo + 1))
-            .concat("'").concat(" descargado con �xito en ").concat("'").concat(nombreFichero)
-            .concat("'"));
       }
 
     }
