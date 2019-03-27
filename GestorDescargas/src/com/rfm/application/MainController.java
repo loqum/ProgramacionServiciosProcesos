@@ -17,7 +17,6 @@ import com.rfm.utils.Factory;
 import com.rfm.utils.FactoryMethod;
 import com.rfm.utils.Utils;
 
-import javafx.concurrent.Worker.State;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
