@@ -17,7 +17,10 @@ import com.rfm.utils.Factory;
 import com.rfm.utils.FactoryMethod;
 import com.rfm.utils.Utils;
 
+import javafx.concurrent.Worker.State;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -35,12 +38,6 @@ import javafx.stage.DirectoryChooser;
 public class MainController implements Initializable {
 
   private static final Logger LOG = Logger.getLogger(MainController.class);
-
-  @FXML
-  private TextField inputUrl;
-
-  @FXML
-  private TextArea inputListaDescargas;
 
   @FXML
   private Button botonDescargar;
@@ -69,7 +66,15 @@ public class MainController implements Initializable {
   @FXML
   private ProgressIndicator indicadorProgreso;
 
+  @FXML
+  private TextArea inputListaDescargas;
+
+  @FXML
+  private TextField inputUrl;
+
   private StringBuilder sb = new StringBuilder();
+
+  private TareaDescarga tareaDescarga;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -84,8 +89,6 @@ public class MainController implements Initializable {
       indicadorProgreso.setProgress(0);
 
       URL url;
-      int indiceNombreArchivo = 0;
-      Thread threadDescarga = null;
 
       int indiceUrl = inputUrl.getText().lastIndexOf('/');
 
@@ -93,34 +96,42 @@ public class MainController implements Initializable {
 
       try {
         url = new URL(inputUrl.getText());
-        TareaDescarga tareaDescarga = new TareaDescarga(url, nombreFichero);
+        tareaDescarga = new TareaDescarga(url, nombreFichero);
 
         barraProgreso.progressProperty().unbind();
-        barraProgreso.progressProperty().add(tareaDescarga.getProgress());
-
         indicadorProgreso.progressProperty().unbind();
-        indicadorProgreso.progressProperty().add(tareaDescarga.getProgress());
 
-        threadDescarga = new Thread(tareaDescarga);
+        barraProgreso.progressProperty().bind(tareaDescarga.progressProperty());
+        indicadorProgreso.progressProperty().bind(tareaDescarga.progressProperty());
 
-        threadDescarga.start();
+        tareaDescarga.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+            new EventHandler<WorkerStateEvent>() {
 
-        indiceNombreArchivo = nombreFichero.lastIndexOf('\\');
-        sb.append("Archivo ".concat("'").concat(nombreFichero.substring(indiceNombreArchivo + 1))
-            .concat("'").concat(" descargado con �xito en ").concat("'").concat(nombreFichero)
-            .concat("'")).append("\n");
+              @Override
+              public void handle(WorkerStateEvent t) {
+                barraProgreso.progressProperty().unbind();
+                indicadorProgreso.progressProperty().unbind();
+                inputUrl.setText(Constants.BLANK.getValue());
 
-        inputListaDescargas.setText(sb.toString());
+                sb.append("Archivo ".concat("'")
+                    .concat(nombreFichero.substring(nombreFichero.lastIndexOf('\\') + 1))
+                    .concat("'").concat(" descargado con éxito en ").concat("'")
+                    .concat(nombreFichero).concat("'")).append("\n");
+
+                inputListaDescargas.setText(sb.toString());
+
+                LOG.info("Archivo ".concat("'")
+                    .concat(nombreFichero.substring(nombreFichero.lastIndexOf('\\') + 1))
+                    .concat("'").concat(" descargado con éxito en ").concat("'")
+                    .concat(nombreFichero).concat("'"));
+              }
+            });
+
+        new Thread(tareaDescarga).start();
 
       } catch (MalformedURLException e) {
         LOG.error("Error: " + e.getMessage());
 
-      } finally {
-
-        inputUrl.setText(Constants.BLANK.getValue());
-        LOG.info("Archivo ".concat("'").concat(nombreFichero.substring(indiceNombreArchivo + 1))
-            .concat("'").concat(" descargado con �xito en ").concat("'").concat(nombreFichero)
-            .concat("'"));
       }
 
     }
@@ -129,6 +140,9 @@ public class MainController implements Initializable {
 
   public void borrarListaDescargas() {
     Utils.borrarTextArea(inputListaDescargas, sb);
+    inputUrl.setText(Constants.BLANK.getValue());
+    barraProgreso.setProgress(0);
+    indicadorProgreso.setProgress(0);
   }
 
   public void cerrarAppAction() {
@@ -137,7 +151,7 @@ public class MainController implements Initializable {
 
   public void abrirArchivoAction() {
 
-    try (Factory factory = FactoryMethod.getInstance()) {
+    try (Factory factory = FactoryMethod.getInstance(null)) {
 
       inputListaDescargas.setText(factory.readFile(Utils.abrirArchivo()));
 
@@ -209,7 +223,19 @@ public class MainController implements Initializable {
   }
 
   public void cancelarDescarga(ActionEvent actionEvent) {
-    
+    tareaDescarga.addEventHandler(WorkerStateEvent.WORKER_STATE_RUNNING,
+        new EventHandler<WorkerStateEvent>() {
+
+          @Override
+          public void handle(WorkerStateEvent t) {
+            tareaDescarga.cancel(true);
+            barraProgreso.progressProperty().unbind();
+            indicadorProgreso.progressProperty().unbind();
+            barraProgreso.setProgress(0);
+            indicadorProgreso.setProgress(0);
+          }
+
+        });
   }
 
 }

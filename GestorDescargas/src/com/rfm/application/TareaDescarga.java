@@ -5,9 +5,11 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-import javax.swing.SwingWorker;
+import javafx.concurrent.Task;
+import javafx.concurrent.Worker.State;
 
-public class TareaDescarga extends SwingWorker<Void, Integer> {
+
+public class TareaDescarga extends Task<State> {
 
   private URL url;
   private String nombreFichero;
@@ -18,36 +20,37 @@ public class TareaDescarga extends SwingWorker<Void, Integer> {
   }
 
   @Override
-  protected Void doInBackground() throws Exception {
-
+  protected State call() throws Exception {
     InputStream inputStream = null;
     FileOutputStream fileOutputStream = null;
+    double contador = 0;
 
     try {
-
+      
       URLConnection urlConnection = url.openConnection();
 
       inputStream = urlConnection.getInputStream();
 
       fileOutputStream = new FileOutputStream(nombreFichero);
 
-      byte[] array = new byte[1000];
+      byte[] array = new byte[2048];
       int leido = inputStream.read(array);
 
       while (leido > 0) {
+        updateProgress(++contador, 10);
         fileOutputStream.write(array, 0, leido);
         leido = inputStream.read(array);
       }
 
     } catch (Exception e) {
       System.err.println(e.getMessage());
+      return State.FAILED;
 
     } finally {
       inputStream.close();
       fileOutputStream.close();
     }
 
-    return null;
+    return State.SUCCEEDED;
   }
-
 }
