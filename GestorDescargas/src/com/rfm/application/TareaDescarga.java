@@ -6,8 +6,10 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import javafx.concurrent.Task;
+import javafx.concurrent.Worker.State;
 
-public class TareaDescarga extends Task<Void> {
+
+public class TareaDescarga extends Task<State> {
 
   private URL url;
   private String nombreFichero;
@@ -18,12 +20,13 @@ public class TareaDescarga extends Task<Void> {
   }
 
   @Override
-  protected Void call() throws Exception {
+  protected State call() throws Exception {
     InputStream inputStream = null;
     FileOutputStream fileOutputStream = null;
+    double contador = 0;
 
     try {
-
+      
       URLConnection urlConnection = url.openConnection();
 
       inputStream = urlConnection.getInputStream();
@@ -34,18 +37,20 @@ public class TareaDescarga extends Task<Void> {
       int leido = inputStream.read(array);
 
       while (leido > 0) {
+        updateProgress(++contador, 100);
         fileOutputStream.write(array, 0, leido);
         leido = inputStream.read(array);
       }
 
     } catch (Exception e) {
       System.err.println(e.getMessage());
+      return State.FAILED;
 
     } finally {
       inputStream.close();
       fileOutputStream.close();
     }
 
-    return null;
+    return State.SUCCEEDED;
   }
 }
