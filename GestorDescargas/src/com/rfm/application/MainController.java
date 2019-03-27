@@ -122,7 +122,7 @@ public class MainController implements Initializable {
 
                 LOG.info("Archivo ".concat("'")
                     .concat(nombreFichero.substring(nombreFichero.lastIndexOf('\\') + 1))
-                    .concat("'").concat(" descargado con �xito en ").concat("'")
+                    .concat("'").concat(" descargado con éxito en ").concat("'")
                     .concat(nombreFichero).concat("'"));
               }
             });
@@ -223,7 +223,19 @@ public class MainController implements Initializable {
   }
 
   public void cancelarDescarga(ActionEvent actionEvent) {
+    tareaDescarga.addEventHandler(WorkerStateEvent.WORKER_STATE_RUNNING,
+        new EventHandler<WorkerStateEvent>() {
 
+          @Override
+          public void handle(WorkerStateEvent t) {
+            tareaDescarga.cancel(true);
+            barraProgreso.progressProperty().unbind();
+            indicadorProgreso.progressProperty().unbind();
+            barraProgreso.setProgress(0);
+            indicadorProgreso.setProgress(0);
+          }
+
+        });
   }
 
 }

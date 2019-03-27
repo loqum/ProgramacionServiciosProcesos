@@ -37,7 +37,7 @@ public class TareaDescarga extends Task<State> {
       int leido = inputStream.read(array);
 
       while (leido > 0) {
-        updateProgress(++contador, 100);
+        updateProgress(++contador, 10);
         fileOutputStream.write(array, 0, leido);
         leido = inputStream.read(array);
       }

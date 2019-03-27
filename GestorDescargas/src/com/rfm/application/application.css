@@ -13,3 +13,21 @@
 .button:hover {
     -fx-background-color: linear-gradient(#2A5058, #61a2b1);
 }
+
+.menu:hover {
+	-fx-background-color: linear-gradient(#1E88E5, #42A5F5);
+}
+
+.menu-bar {
+	-fx-background-color: #1E88E5;
+}
+
+.text-area .content{
+	-fx-font-family: "Comic Sans";
+	-fx-background-color: #E3F2FD;
+}
+
+.text-field {
+	-fx-font-family: "Comic Sans";
+	-fx-background-color: #E3F2FD;
+}
