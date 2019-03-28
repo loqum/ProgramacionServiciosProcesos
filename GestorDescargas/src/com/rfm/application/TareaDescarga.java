@@ -9,46 +9,46 @@ import javafx.concurrent.Task;
 
 public class TareaDescarga extends Task<Void> {
 
-  private URL url;
-  private String nombreFichero;
+	private URL url;
+	private String nombreFichero;
 
-  public TareaDescarga(URL url, String nombreFichero) {
-    this.url = url;
-    this.nombreFichero = nombreFichero;
-  }
+	public TareaDescarga(URL url, String nombreFichero) {
+		this.url = url;
+		this.nombreFichero = nombreFichero;
+	}
 
-  @Override
-  protected Void call() throws Exception {
-    InputStream inputStream = null;
-    FileOutputStream fileOutputStream = null;
-    double contador = 0;
+	@Override
+	protected Void call() throws Exception {
+		InputStream inputStream = null;
+		FileOutputStream fileOutputStream = null;
+		double contador = 0.0;
 
-    try {
+		try {
 
-      URLConnection urlConnection = url.openConnection();
+			URLConnection urlConnection = url.openConnection();
 
-      inputStream = urlConnection.getInputStream();
+			inputStream = urlConnection.getInputStream();
 
-      fileOutputStream = new FileOutputStream(nombreFichero);
+			fileOutputStream = new FileOutputStream(nombreFichero);
 
-      byte[] array = new byte[2048];
-      int leido = inputStream.read(array);
+			byte[] array = new byte[1000];
+			int leido = inputStream.read(array);
 
-      while (leido > 0) {
-        updateProgress(++contador, 10);
-        fileOutputStream.write(array, 0, leido);
-        leido = inputStream.read(array);
-      }
+			while (leido > 0) {
+				updateProgress(++contador, leido);
+				fileOutputStream.write(array, 0, leido);
+				leido = inputStream.read(array);
+			}
 
-    } catch (Exception e) {
-      System.err.println(e.getMessage());
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
 
-    } finally {
-      inputStream.close();
-      fileOutputStream.close();
-    }
+		} finally {
+			inputStream.close();
+			fileOutputStream.close();
+		}
 
-    return null;
+		return null;
 
-  }
+	}
 }
