@@ -103,28 +103,24 @@ public class MainController implements Initializable {
         barraProgreso.progressProperty().bind(tareaDescarga.progressProperty());
         indicadorProgreso.progressProperty().bind(tareaDescarga.progressProperty());
 
-        tareaDescarga.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
-            new EventHandler<WorkerStateEvent>() {
+        tareaDescarga.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, new EventHandler<WorkerStateEvent>() {
 
-              @Override
-              public void handle(WorkerStateEvent t) {
-                barraProgreso.progressProperty().unbind();
-                indicadorProgreso.progressProperty().unbind();
-                inputUrl.setText(Constants.BLANK.getValue());
+          @Override
+          public void handle(WorkerStateEvent t) {
+            barraProgreso.progressProperty().unbind();
+            indicadorProgreso.progressProperty().unbind();
+            inputUrl.setText(Constants.BLANK.getValue());
 
-                sb.append("Archivo ".concat("'")
-                    .concat(nombreFichero.substring(nombreFichero.lastIndexOf('\\') + 1))
-                    .concat("'").concat(" descargado con éxito en ").concat("'")
-                    .concat(nombreFichero).concat("'")).append("\n");
+            sb.append("Archivo ".concat("'").concat(nombreFichero.substring(nombreFichero.lastIndexOf('\\') + 1))
+                .concat("'").concat(" descargado con éxito en ").concat("'").concat(nombreFichero).concat("'"))
+                .append("\n");
 
-                inputListaDescargas.setText(sb.toString());
+            inputListaDescargas.setText(sb.toString());
 
-                LOG.info("Archivo ".concat("'")
-                    .concat(nombreFichero.substring(nombreFichero.lastIndexOf('\\') + 1))
-                    .concat("'").concat(" descargado con éxito en ").concat("'")
-                    .concat(nombreFichero).concat("'"));
-              }
-            });
+            LOG.info("Archivo ".concat("'").concat(nombreFichero.substring(nombreFichero.lastIndexOf('\\') + 1))
+                .concat("'").concat(" descargado con éxito en ").concat("'").concat(nombreFichero).concat("'"));
+          }
+        });
 
         new Thread(tareaDescarga).start();
 
@@ -203,9 +199,8 @@ public class MainController implements Initializable {
           threadDescarga = new Thread(tareaDescarga);
           threadDescarga.start();
 
-          sb.append("Archivo ".concat("'").concat(nombreArchivo).concat("'")
-              .concat(" descargado con éxito en ").concat("'").concat(directorio).concat("'"))
-              .append("\n");
+          sb.append("Archivo ".concat("'").concat(nombreArchivo).concat("'").concat(" descargado con éxito en ")
+              .concat("'").concat(directorio).concat("'")).append("\n");
         }
 
       } catch (MalformedURLException e) {
@@ -222,19 +217,12 @@ public class MainController implements Initializable {
   }
 
   public void cancelarDescarga(ActionEvent actionEvent) {
-    tareaDescarga.addEventHandler(WorkerStateEvent.WORKER_STATE_RUNNING,
-        new EventHandler<WorkerStateEvent>() {
+    tareaDescarga.cancel(true);
+    barraProgreso.progressProperty().unbind();
+    indicadorProgreso.progressProperty().unbind();
+    barraProgreso.setProgress(0);
+    indicadorProgreso.setProgress(0);
 
-          @Override
-          public void handle(WorkerStateEvent t) {
-            tareaDescarga.cancel(true);
-            barraProgreso.progressProperty().unbind();
-            indicadorProgreso.progressProperty().unbind();
-            barraProgreso.setProgress(0);
-            indicadorProgreso.setProgress(0);
-          }
-
-        });
   }
 
 }

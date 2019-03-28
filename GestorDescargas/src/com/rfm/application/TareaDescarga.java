@@ -5,50 +5,55 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
+import org.apache.log4j.Logger;
+
 import javafx.concurrent.Task;
 
-public class TareaDescarga extends Task<Void> {
+public class TareaDescarga extends Task<Void> implements Runnable {
 
-	private URL url;
-	private String nombreFichero;
+  private static final Logger LOG = Logger.getLogger(TareaDescarga.class);
 
-	public TareaDescarga(URL url, String nombreFichero) {
-		this.url = url;
-		this.nombreFichero = nombreFichero;
-	}
+  private URL url;
+  private String nombreFichero;
 
-	@Override
-	protected Void call() throws Exception {
-		InputStream inputStream = null;
-		FileOutputStream fileOutputStream = null;
-		double contador = 0.0;
+  public TareaDescarga(URL url, String nombreFichero) {
+    this.url = url;
+    this.nombreFichero = nombreFichero;
+  }
 
-		try {
+  @Override
+  protected Void call() throws Exception {
+    double workDone = 0;
+    double max = 0;
 
-			URLConnection urlConnection = url.openConnection();
+    Thread.sleep(1000);
 
-			inputStream = urlConnection.getInputStream();
+    URLConnection urlConnection = url.openConnection();
 
-			fileOutputStream = new FileOutputStream(nombreFichero);
+    try (InputStream inputStream = urlConnection.getInputStream();
+        FileOutputStream fileOutputStream = new FileOutputStream(nombreFichero)) {
 
-			byte[] array = new byte[1000];
-			int leido = inputStream.read(array);
+      byte[] array = new byte[2048];
+      int leido = inputStream.read(array);
 
-			while (leido > 0) {
-				updateProgress(++contador, leido);
-				fileOutputStream.write(array, 0, leido);
-				leido = inputStream.read(array);
-			}
+      while (leido > 0) {
+        updateProgress(++workDone, max++);
+        fileOutputStream.write(array, 0, leido);
+        leido = inputStream.read(array);
 
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
+        if (Thread.currentThread().isInterrupted()) {
+          LOG.info("Salida");
+          return null;
+        }
 
-		} finally {
-			inputStream.close();
-			fileOutputStream.close();
-		}
+      }
 
-		return null;
+    } catch (Exception e) {
+      LOG.error(e.getMessage());
 
-	}
+    }
+
+    return null;
+
+  }
 }
