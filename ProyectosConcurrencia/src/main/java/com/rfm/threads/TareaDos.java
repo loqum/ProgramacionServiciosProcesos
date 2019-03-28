@@ -1,6 +1,6 @@
 package com.rfm.threads;
 
-public class TareaDos extends Tarea implements Runnable{
+public class TareaDos extends Tarea {
   @Override
   public void run() {
 
