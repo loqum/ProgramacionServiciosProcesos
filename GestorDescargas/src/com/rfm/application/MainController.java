@@ -183,36 +183,41 @@ public class MainController implements Initializable {
 
     if (directorio != null) {
 
-      String nombreArchivo = null;
-      String nombreArchivoCompleto = null;
-      Thread threadDescarga = null;
-      List<String> enlacesUrl = new ArrayList<>();
+      if (!(inputListaDescargas.getText().equals(null) || inputListaDescargas.getText().equals(""))) {
 
-      try {
+        String nombreArchivo = null;
+        String nombreArchivoCompleto = null;
+        Thread threadDescarga = null;
+        List<String> enlacesUrl = new ArrayList<>();
 
-        enlacesUrl = Utils.agregarEnlacesList(inputListaDescargas.getText());
+        try {
 
-        for (String string : enlacesUrl) {
-          nombreArchivo = string.substring(string.lastIndexOf('/'));
-          nombreArchivoCompleto = directorio.concat("\\").concat(nombreArchivo);
-          TareaDescarga tareaDescarga = new TareaDescarga(new URL(string), nombreArchivoCompleto);
-          threadDescarga = new Thread(tareaDescarga);
-          threadDescarga.start();
+          enlacesUrl = Utils.agregarEnlacesList(inputListaDescargas.getText());
+
+          for (String string : enlacesUrl) {
+            nombreArchivo = string.substring(string.lastIndexOf('/'));
+            nombreArchivoCompleto = directorio.concat("\\").concat(nombreArchivo);
+            TareaDescarga tareaDescarga = new TareaDescarga(new URL(string), nombreArchivoCompleto);
+            threadDescarga = new Thread(tareaDescarga);
+            threadDescarga.start();
 
           sb.append("Archivo ".concat("'").concat(nombreArchivo).concat("'").concat(" descargado con éxito en ")
               .concat("'").concat(directorio).concat("'")).append("\n");
         }
 
-      } catch (MalformedURLException e) {
-        LOG.error("Error: " + e.getMessage());
+        } catch (MalformedURLException e) {
+          LOG.error("Error: " + e.getMessage());
 
-      } finally {
-        inputListaDescargas.setText(null);
-        inputListaDescargas.setText(sb.toString());
+        } finally {
+          inputListaDescargas.setText(null);
+          inputListaDescargas.setText(sb.toString());
+        }
+      } else {
+        Utils.ventanaAlertaListaVacia();
       }
 
     } else {
-      Utils.ventanaAlerta();
+      Utils.ventanaAlertaRutaArchivo();
     }
   }
 

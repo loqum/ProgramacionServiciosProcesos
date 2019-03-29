@@ -14,7 +14,11 @@ public enum Constants {
   
   TITULO_VENTANA_ALERTA("Alerta!"),
   ENCABEZADO_VENTANA_ALERTA("Antes de descargar debes seleccionar un lugar donde guardar los archivos"),
-  CONTENIDO_VENTANA_ALERTA("Puedes seleccionar la ruta en Archivo - Ruta de guardado predeterminado");
+  CONTENIDO_VENTANA_ALERTA("Puedes seleccionar la ruta en Archivo - Ruta de guardado predeterminado"),
+  
+  TITULO_VENTANA_ALERTA_VACIA("Alerta!"),
+  ENCABEZADO_VENTANA_ALERTA_VACIA("Antes debes seleccionar un archivo de texto (*.txt) que incluya los enlaces que deseas descargar"),
+  CONTENIDO_VENTANA_ALERTA_VACIA("Puedes seleccionar el archivo en cuestión en Archivo - Seleccionar un archivo...");
   
   private final String value;
   
