@@ -10,28 +10,45 @@
 
 .button:hover {
 	-fx-background-color: linear-gradient(#33d6ff, #2A5058);
-	
 }
 
 .button:pressed {
     -fx-background-color: linear-gradient(#00BCD4, #33e7ff);
 }
 
-.menu:hover {
-	-fx-background-color: linear-gradient(#1E88E5, #42A5F5);
-}
-
-.menu-item:hover {
-	-fx-background-color: linear-gradient(#1E88E5, #42A5F5);
-}
-
 .menu-bar {
-	-fx-background-color: #1E88E5;
+    /*-fx-background-color: transparent;*/
+        -fx-background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* .menu {
+    -fx-label-padding: 3px;
+}*/
+
+.menu .label, .menu-item .label {
+    -fx-text-fill: #eee;
+}
+
+.menu:hover, .menu:showing {
+    -fx-background-color: rgba(0, 0, 0, 0.2);
+}
+
+.menu-item:hover, .menu-item:focused {
+    -fx-background-color: rgba(0, 0, 0, 0.4);
+}
+
+.context-menu {
+    -fx-background-color: rgba(0, 0, 0, 0.3);
+}
+
+.text-area {
+	-fx-font-family: "Comic Sans";
 }
 
 .text-area .content{
 	-fx-font-family: "Comic Sans";
-	-fx-background-color: #E3F2FD;
+        /*-fx-background-color: transparent;*/
+
 }
 
 .text-field {

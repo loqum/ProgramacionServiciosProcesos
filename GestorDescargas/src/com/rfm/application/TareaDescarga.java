@@ -37,7 +37,7 @@ public class TareaDescarga extends Task<Void> implements Runnable {
       int leido = inputStream.read(array);
 
       while (leido > 0) {
-        updateProgress(++workDone, max++);
+        updateProgress(++workDone, ++max);
         fileOutputStream.write(array, 0, leido);
         leido = inputStream.read(array);
 

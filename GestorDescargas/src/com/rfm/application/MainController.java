@@ -103,6 +103,8 @@ public class MainController implements Initializable {
         barraProgreso.progressProperty().bind(tareaDescarga.progressProperty());
         indicadorProgreso.progressProperty().bind(tareaDescarga.progressProperty());
 
+        new Thread(tareaDescarga).start();
+
         tareaDescarga.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, new EventHandler<WorkerStateEvent>() {
 
           @Override
@@ -120,9 +122,8 @@ public class MainController implements Initializable {
             LOG.info("Archivo ".concat("'").concat(nombreFichero.substring(nombreFichero.lastIndexOf('\\') + 1))
                 .concat("'").concat(" descargado con Ã©xito en ").concat("'").concat(nombreFichero).concat("'"));
           }
-        });
 
-        new Thread(tareaDescarga).start();
+        });
 
       } catch (MalformedURLException e) {
         LOG.error("Error: " + e.getMessage());
@@ -187,23 +188,44 @@ public class MainController implements Initializable {
 
         String nombreArchivo = null;
         String nombreArchivoCompleto = null;
-        Thread threadDescarga = null;
         List<String> enlacesUrl = new ArrayList<>();
 
         try {
 
           enlacesUrl = Utils.agregarEnlacesList(inputListaDescargas.getText());
 
+          barraProgreso.progressProperty().unbind();
+          indicadorProgreso.progressProperty().unbind();
+
           for (String string : enlacesUrl) {
             nombreArchivo = string.substring(string.lastIndexOf('/'));
             nombreArchivoCompleto = directorio.concat("\\").concat(nombreArchivo);
             TareaDescarga tareaDescarga = new TareaDescarga(new URL(string), nombreArchivoCompleto);
-            threadDescarga = new Thread(tareaDescarga);
-            threadDescarga.start();
 
-          sb.append("Archivo ".concat("'").concat(nombreArchivo).concat("'").concat(" descargado con Ã©xito en ")
-              .concat("'").concat(directorio).concat("'")).append("\n");
-        }
+            new Thread(tareaDescarga).start();
+
+            barraProgreso.progressProperty().bind(tareaDescarga.progressProperty());
+            indicadorProgreso.progressProperty().bind(tareaDescarga.progressProperty());
+
+            tareaDescarga.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+                new EventHandler<WorkerStateEvent>() {
+
+                  @Override
+                  public void handle(WorkerStateEvent t) {
+                    barraProgreso.progressProperty().unbind();
+                    indicadorProgreso.progressProperty().unbind();
+                    inputUrl.setText(Constants.BLANK.getValue());
+
+                  }
+                });
+
+            sb.append("Archivo ".concat("'").concat(nombreArchivo).concat("'").concat(" descargado con éxito en ")
+                .concat("'").concat(directorio).concat("'")).append("\n");
+
+          }
+
+          LOG.info("Archivo ".concat("'").concat(nombreArchivo).concat("'").concat(" descargado con éxito en ")
+              .concat("'").concat(directorio).concat("'").concat("\n"));
 
         } catch (MalformedURLException e) {
           LOG.error("Error: " + e.getMessage());
