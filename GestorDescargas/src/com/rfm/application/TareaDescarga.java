@@ -30,7 +30,9 @@ public class TareaDescarga extends Task<Void> implements Runnable {
 
     URLConnection urlConnection = url.openConnection();
 
-    try (InputStream inputStream = urlConnection.getInputStream();
+    try (
+
+        InputStream inputStream = urlConnection.getInputStream();
         FileOutputStream fileOutputStream = new FileOutputStream(nombreFichero)) {
 
       byte[] array = new byte[2048];
@@ -42,7 +44,7 @@ public class TareaDescarga extends Task<Void> implements Runnable {
         leido = inputStream.read(array);
 
         if (Thread.currentThread().isInterrupted()) {
-          LOG.info("Salida");
+          LOG.info("Cancelando...");
           return null;
         }
 

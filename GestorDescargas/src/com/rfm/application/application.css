@@ -5,7 +5,7 @@
 .button {
     -fx-font-weight: bold;
     -fx-background-color: linear-gradient(#00ccff, #2A5058);
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.6) , 5.0, 0.0 , 0.0 , 1.0 );
 }
 
 .button:hover {
@@ -17,28 +17,24 @@
 }
 
 .menu-bar {
-    /*-fx-background-color: transparent;*/
-        -fx-background-color: rgba(0, 0, 0, 0.2);
+    -fx-background-color: rgba(0.0, 0.0, 0.0, 0.2);
 }
-
-/* .menu {
-    -fx-label-padding: 3px;
-}*/
 
 .menu .label, .menu-item .label {
     -fx-text-fill: #eee;
 }
 
-.menu:hover, .menu:showing {
-    -fx-background-color: rgba(0, 0, 0, 0.2);
+.menu .menu:hover, .menu:showing, .menu:hover {
+    -fx-background-color: rgba(0.0, 0.0, 0.0, 0.2);
 }
 
+
 .menu-item:hover, .menu-item:focused {
-    -fx-background-color: rgba(0, 0, 0, 0.4);
+    -fx-background-color: rgba(0.0, 0.0, 0.0, 0.4);
 }
 
 .context-menu {
-    -fx-background-color: rgba(0, 0, 0, 0.3);
+    -fx-background-color: rgba(0.0, 0.0, 0.0, 0.3);
 }
 
 .text-area .content{
