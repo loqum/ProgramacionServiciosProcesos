@@ -33,8 +33,6 @@ public class SplashScreenController implements Initializable {
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
 
-    
-
     FadeTransition transition = new FadeTransition(Duration.millis(3000), fondo);
     transition.setFromValue(-1);
     transition.setToValue(2);
@@ -47,7 +45,7 @@ public class SplashScreenController implements Initializable {
 
         try {
           Parent root = null;
-          root = FXMLLoader.load(getClass().getResource("/view/Main.fxml"));
+          root = FXMLLoader.load(getClass().getResource("/view/GestorDescarga.fxml"));
           Stage ventana = (Stage) fondo.getScene().getWindow();
           ventana.hide();
           Stage ventanaApp = new Stage();

@@ -8,9 +8,9 @@ public enum Constants {
   
   BLANK(""),
   
-  ENCABEZADO_VENTANA_CONFIRMACION("AtenciÃ³n!"),
-  TITULO_VENTANA_CONFIRMACION("Ventana de confirmaciÃ³n"),  
-  CONTENIDO_VENTANA_CONFIRMACION("Â¿EstÃ¡s seguro de que quieres salir del programa?"),
+  ENCABEZADO_VENTANA_CONFIRMACION("Atención!"),
+  TITULO_VENTANA_CONFIRMACION("Ventana de confirmación"),  
+  CONTENIDO_VENTANA_CONFIRMACION("¿Estás seguro de que quieres salir del programa?"),
   
   TITULO_VENTANA_ALERTA("Alerta!"),
   ENCABEZADO_VENTANA_ALERTA("Antes de descargar debes seleccionar un lugar donde guardar los archivos"),

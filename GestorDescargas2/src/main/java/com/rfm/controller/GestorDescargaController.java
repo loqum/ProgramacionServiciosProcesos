@@ -188,7 +188,7 @@ public class GestorDescargaController implements Initializable {
 
     if (directorio != null) {
 
-      if (inputListaDescargas.getText() != null || inputListaDescargas.getText().equals("")) {
+      if (!inputListaDescargas.getText().equals("")) {
 
         String nombreArchivo = null;
         String nombreArchivoCompleto = null;
@@ -258,7 +258,7 @@ public class GestorDescargaController implements Initializable {
 
   public void archivarEnlaces() {
 
-    if (inputListaDescargas.getText() != null || !inputListaDescargas.getText().equals("")) {
+    if (!inputListaDescargas.getText().equals("")) {
 
       try (Factory factory = FactoryMethod.getInstance(null)) {
 
@@ -270,6 +270,8 @@ public class GestorDescargaController implements Initializable {
         LOG.error("Error: " + e.getMessage());
       }
 
+    } else {
+      Utils.emptyListAlert();
     }
 
   }

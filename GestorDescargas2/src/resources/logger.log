@@ -3,3 +3,22 @@
 2019-04-01 17:44:24 INFO  MainController:125 - Archivo 'wwefw.png' descargado con éxito en 'C:\Users\rfernandezm\Desktop\wwefw.png'
 2019-04-01 17:44:46 INFO  MainController:125 - Archivo 'wedfwa.png' descargado con éxito en 'C:\Users\rfernandezm\Desktop\wedfwa.png'
 2019-04-01 17:45:09 INFO  MainController:125 - Archivo 'C3rr8.png' descargado con éxito en 'C:\Users\rfernandezm\Desktop\C3rr8.png'
+2019-04-01 18:51:09 ERROR GestorDescarga:38 - 
+/C:/Users/ruben/git/ProgramacionServiciosProcesos/GestorDescargas2/target/classes/view/SplashScreen.fxml:11
+
+2019-04-01 18:51:51 ERROR GestorDescarga:38 - 
+/C:/Users/ruben/git/ProgramacionServiciosProcesos/GestorDescargas2/target/classes/view/SplashScreen.fxml:11
+
+2019-04-01 18:53:20 ERROR GestorDescarga:38 - 
+/C:/Users/ruben/git/ProgramacionServiciosProcesos/GestorDescargas2/target/classes/view/SplashScreen.fxml:11
+
+2019-04-01 18:54:17 ERROR GestorDescarga:38 - 
+/C:/Users/ruben/git/ProgramacionServiciosProcesos/GestorDescargas2/target/classes/view/SplashScreen.fxml:11
+
+2019-04-01 18:54:44 ERROR GestorDescarga:38 - 
+/C:/Users/ruben/git/ProgramacionServiciosProcesos/GestorDescargas2/target/classes/view/SplashScreen.fxml:11
+
+2019-04-01 18:57:08 INFO  GestorDescargaController:37 - Cerrando...
+2019-04-01 18:57:08 ERROR GestorDescargaController:270 - Error: null
+2019-04-01 19:01:50 INFO  GestorDescargaController:37 - Cerrando...
+2019-04-01 19:01:50 ERROR GestorDescargaController:270 - Error: null

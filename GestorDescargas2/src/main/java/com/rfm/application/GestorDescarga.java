@@ -22,7 +22,7 @@ public class GestorDescarga extends Application {
   private static final Logger LOG = Logger.getLogger(GestorDescarga.class);
 
   @Override
-  public void start(Stage primaryStage) {
+  public void start(Stage primaryStage) throws IOException {
     BasicConfigurator.configure();
 
     Parent root;
@@ -36,6 +36,7 @@ public class GestorDescarga extends Application {
       primaryStage.show();
     } catch (IOException e) {
       LOG.error(e.getMessage());
+      throw e;
     }
 
   }
