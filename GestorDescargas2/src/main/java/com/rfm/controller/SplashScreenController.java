@@ -1,4 +1,4 @@
-package com.rfm.application;
+package com.rfm.controller;
 
 import java.io.IOException;
 import java.net.URL;

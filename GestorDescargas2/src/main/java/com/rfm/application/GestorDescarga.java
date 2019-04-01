@@ -17,9 +17,9 @@ import javafx.scene.image.Image;
  * @author Ruben Fernandez Moreno
  */
 
-public class Main extends Application {
+public class GestorDescarga extends Application {
 
-  private static final Logger LOG = Logger.getLogger(Main.class);
+  private static final Logger LOG = Logger.getLogger(GestorDescarga.class);
 
   @Override
   public void start(Stage primaryStage) {
