@@ -39,7 +39,7 @@ public class TareaDescarga extends Task<Void> implements Runnable {
       int max = leido;
 
       while (leido > 0) {
-        fileOutputStream.write(array, 0, leido);
+        fileOutputStream.write(array, 0, max);
         leido = inputStream.read(array);
         this.updateProgress(++workDone, max);
 
