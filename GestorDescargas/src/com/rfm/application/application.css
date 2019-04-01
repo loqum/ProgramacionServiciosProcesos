@@ -4,16 +4,16 @@
 
 .button {
     -fx-font-weight: bold;
-    -fx-background-color: linear-gradient(#00ccff, #2A5058);
+    -fx-background-color: rgba(0.0, 0.0, 0.0, 0.1);
     -fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.6) , 5.0, 0.0 , 0.0 , 1.0 );
 }
 
 .button:hover {
-	-fx-background-color: linear-gradient(#33d6ff, #2A5058);
+	-fx-background-color: rgba(0.0, 0.0, 0.0, 0.2);
 }
 
 .button:pressed {
-    -fx-background-color: linear-gradient(#00BCD4, #33e7ff);
+    -fx-background-color: rgba(0.0, 0.0, 0.0, 0.4);
 }
 
 .menu-bar {
@@ -37,12 +37,34 @@
     -fx-background-color: rgba(0.0, 0.0, 0.0, 0.3);
 }
 
-.text-area .content{
-	-fx-font-family: "Comic Sans";
-    -fx-background-color: #E3F2FD;
+.text-area .content {
+	-fx-background-color: #E3F2FD;
+
 }
 
 .text-field {
-	-fx-font-family: "Comic Sans";
-	-fx-background-color: #E3F2FD;
+    -fx-background-color: rgba(0.0, 0.0, 0.0, 0.1);
+    -fx-text-fill: white;
+}
+
+.progress-bar > .bar {
+    -fx-background-color: linear-gradient(
+        from 0px .75em to .75em 0px,
+        repeat,
+        -fx-accent 0%,
+        -fx-accent 49%,
+        derive(-fx-accent, 30%) 50%,
+        derive(-fx-accent, 30%) 99%
+    );
+}
+
+.progress-bar > .track {
+  -fx-text-box-border: rgba(0.0, 0.0, 0.0, 0.0);
+  -fx-control-inner-background: rgba(0.0, 0.0, 0.0, 0.0);
+}
+
+.progress-indicator .indicator {
+    -fx-background-color: rgba(0.0, 0.0, 0.0, 0.1);
+        -fx-progress-color: white;
+    
 }

@@ -24,7 +24,6 @@ public class TareaDescarga extends Task<Void> implements Runnable {
   @Override
   protected Void call() throws Exception {
     double workDone = 0;
-    double max = 0;
 
     Thread.sleep(1000);
 
@@ -35,13 +34,14 @@ public class TareaDescarga extends Task<Void> implements Runnable {
         InputStream inputStream = urlConnection.getInputStream();
         FileOutputStream fileOutputStream = new FileOutputStream(nombreFichero)) {
 
-      byte[] array = new byte[2048];
+      byte[] array = new byte[1000];
       int leido = inputStream.read(array);
+      int max = leido;
 
       while (leido > 0) {
-        updateProgress(++workDone, ++max);
         fileOutputStream.write(array, 0, leido);
         leido = inputStream.read(array);
+        this.updateProgress(++workDone, max);
 
         if (Thread.currentThread().isInterrupted()) {
           LOG.info("Cancelando...");

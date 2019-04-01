@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -26,18 +27,22 @@ public class SplashScreenController implements Initializable {
   @FXML
   ImageView fondo;
 
+  @FXML
+  ProgressIndicator indicadorProgresoSplash;
+
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
-    FadeTransition transition = new FadeTransition(Duration.millis(2500), fondo);
+    FadeTransition transition = new FadeTransition(Duration.millis(3000), fondo);
     transition.setFromValue(-1);
     transition.setToValue(2);
-    transition.play();
+    transition.play();    
 
     transition.setOnFinished(new EventHandler<ActionEvent>() {
 
       @Override
       public void handle(ActionEvent event) {
 
+        
         try {
           Stage ventana = (Stage) fondo.getScene().getWindow();
           ventana.hide();

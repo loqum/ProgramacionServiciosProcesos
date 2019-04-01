@@ -35,7 +35,7 @@ public class FactoryTxt implements Factory, Serializable {
 
   @Override
   public void close() throws Exception {
-    LOG.info("Cerrando");
+    LOG.info("Cerrando...");
 
   }
 
@@ -52,6 +52,11 @@ public class FactoryTxt implements Factory, Serializable {
       throw e;
     }
 
+  }
+
+  @Override
+  public void writeFile(String fileName, String content) throws IOException {
+    Files.write(Paths.get(fileName), content.getBytes());
   }
 
 }

@@ -9,4 +9,8 @@ public interface Factory extends AutoCloseable {
 
   public List<?> readFilesList(String fileName) throws IOException;
 
+  public void writeFile(String fileName, String content) throws IOException;
+  
+  
+
 }

@@ -45,6 +45,9 @@ public class MainController implements Initializable {
   private Button botonDescargarLista;
 
   @FXML
+  private Button botonArchivarEnlaces;
+
+  @FXML
   private Button botonCancelar;
 
   @FXML
@@ -91,7 +94,7 @@ public class MainController implements Initializable {
 
       int indiceUrl = inputUrl.getText().lastIndexOf('/');
 
-      String nombreFichero = Utils.guardarArchivo(inputUrl.getText().substring(indiceUrl + 1));
+      String nombreFichero = Utils.saveFilesMultiTypes(inputUrl.getText().substring(indiceUrl + 1));
 
       try {
         url = new URL(inputUrl.getText());
@@ -114,7 +117,7 @@ public class MainController implements Initializable {
             inputUrl.setText(Constants.BLANK.getValue());
 
             sb.append("Archivo ".concat("'").concat(nombreFichero.substring(nombreFichero.lastIndexOf('\\') + 1))
-                .concat("'").concat(" descargado con Ã©xito en ").concat("'").concat(nombreFichero).concat("'"))
+                .concat("'").concat(" descargado con éxito en ").concat("'").concat(nombreFichero).concat("'"))
                 .append("\n");
 
             inputListaDescargas.setText(sb.toString());
@@ -135,21 +138,21 @@ public class MainController implements Initializable {
   }
 
   public void borrarListaDescargas() {
-    Utils.borrarTextArea(inputListaDescargas, sb);
+    Utils.deleteText(inputListaDescargas, sb);
     inputUrl.setText(Constants.BLANK.getValue());
     barraProgreso.setProgress(0);
     indicadorProgreso.setProgress(0);
   }
 
   public void cerrarAppAction() {
-    Utils.ventanaConfirmacion();
+    Utils.confirmationAlert();
   }
 
   public void abrirArchivoAction() {
 
     try (Factory factory = FactoryMethod.getInstance(null)) {
 
-      inputListaDescargas.setText(factory.readFile(Utils.abrirArchivo()));
+      inputListaDescargas.setText(factory.readFile(Utils.openTxtFile()));
 
     } catch (Exception e) {
 
@@ -192,7 +195,7 @@ public class MainController implements Initializable {
 
         try {
 
-          enlacesUrl = Utils.agregarEnlacesList(inputListaDescargas.getText());
+          enlacesUrl = Utils.addUrlList(inputListaDescargas.getText());
 
           barraProgreso.progressProperty().unbind();
           indicadorProgreso.progressProperty().unbind();
@@ -235,11 +238,11 @@ public class MainController implements Initializable {
           inputListaDescargas.setText(sb.toString());
         }
       } else {
-        Utils.ventanaAlertaListaVacia();
+        Utils.emptyListAlert();
       }
 
     } else {
-      Utils.ventanaAlertaRutaArchivo();
+      Utils.pathFileAlert();
     }
   }
 
@@ -250,6 +253,19 @@ public class MainController implements Initializable {
     barraProgreso.setProgress(0);
     indicadorProgreso.setProgress(0);
 
+  }
+
+  public void archivarEnlaces() {
+
+    try (Factory factory = FactoryMethod.getInstance(null)) {
+
+      factory.writeFile(Utils.saveTxtFile(), inputListaDescargas.getText());
+
+    } catch (Exception e) {
+      LOG.error("Error: " + e.getMessage());
+    } finally {
+      Utils.successAlert();
+    }
   }
 
 }
