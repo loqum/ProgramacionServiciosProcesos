@@ -2,6 +2,12 @@ package com.rfm.controller;
 
 import java.io.File;
 
+import com.rfm.application.TareaDescarga;
+import com.rfm.utils.Constants;
+import com.rfm.utils.Factory;
+import com.rfm.utils.FactoryMethod;
+import com.rfm.utils.Utils;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -10,16 +16,7 @@ import java.util.ResourceBundle;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
-import org.apache.log4j.Logger;
-
-import com.rfm.application.TareaDescarga;
-import com.rfm.utils.Constants;
-import com.rfm.utils.Factory;
-import com.rfm.utils.FactoryMethod;
-import com.rfm.utils.Utils;
-
 import javafx.concurrent.WorkerStateEvent;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,6 +27,8 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
+
+import org.apache.log4j.Logger;
 
 /**
  * @author Ruben Fernandez Moreno
@@ -84,7 +83,7 @@ public class GestorDescargaController implements Initializable {
 
   }
 
-  public void descargar(ActionEvent actionEvent) {
+  public void descargar() {
 
     if (!inputUrl.getText().equals("")) {
 
@@ -129,9 +128,10 @@ public class GestorDescargaController implements Initializable {
 
         });
 
+        LOG.info("Descarga realizada con éxito");
+
       } catch (MalformedURLException e) {
         LOG.error("Error: " + e.getMessage());
-
       }
 
     }
@@ -151,7 +151,7 @@ public class GestorDescargaController implements Initializable {
 
   public void abrirArchivoAction() {
 
-    try (Factory factory = FactoryMethod.getInstance(null)) {
+    try (Factory factory = FactoryMethod.getInstance()) {
 
       inputListaDescargas.setText(factory.readFile(Utils.openTxtFile()));
 
@@ -180,7 +180,7 @@ public class GestorDescargaController implements Initializable {
     return dir;
   }
 
-  public void descargarLista(ActionEvent actionEvent) {
+  public void descargarLista() {
     String directorio = null;
 
     Preferences preferences = Preferences.userNodeForPackage(GestorDescargaController.class);
@@ -204,7 +204,7 @@ public class GestorDescargaController implements Initializable {
           for (String string : enlacesUrl) {
             nombreArchivo = string.substring(string.lastIndexOf('/'));
             nombreArchivoCompleto = directorio.concat("\\").concat(nombreArchivo);
-            TareaDescarga tareaDescarga = new TareaDescarga(new URL(string), nombreArchivoCompleto);
+            tareaDescarga = new TareaDescarga(new URL(string), nombreArchivoCompleto);
 
             new Thread(tareaDescarga).start();
 
@@ -247,12 +247,19 @@ public class GestorDescargaController implements Initializable {
     }
   }
 
-  public void cancelarDescarga(ActionEvent actionEvent) {
-    tareaDescarga.cancel(true);
-    barraProgreso.progressProperty().unbind();
-    indicadorProgreso.progressProperty().unbind();
-    barraProgreso.setProgress(0);
-    indicadorProgreso.setProgress(0);
+  public void cancelarDescarga() {
+
+    try {
+      tareaDescarga.cancel(true);
+      barraProgreso.progressProperty().unbind();
+      indicadorProgreso.progressProperty().unbind();
+      barraProgreso.setProgress(0);
+      indicadorProgreso.setProgress(0);
+
+    } catch (RuntimeException e) {
+      LOG.error("Error: " + e.getLocalizedMessage());
+      throw e;
+    }
 
   }
 
@@ -260,7 +267,7 @@ public class GestorDescargaController implements Initializable {
 
     if (!inputListaDescargas.getText().equals("")) {
 
-      try (Factory factory = FactoryMethod.getInstance(null)) {
+      try (Factory factory = FactoryMethod.getInstance()) {
 
         factory.writeFile(Utils.saveTxtFile(), inputListaDescargas.getText());
         Utils.successAlert();

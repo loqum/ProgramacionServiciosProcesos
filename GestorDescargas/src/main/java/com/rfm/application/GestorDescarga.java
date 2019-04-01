@@ -17,9 +17,9 @@ import javafx.scene.image.Image;
  * @author Ruben Fernandez Moreno
  */
 
-public class Main extends Application {
+public class GestorDescarga extends Application {
 
-  private static final Logger LOG = Logger.getLogger(Main.class);
+  private static final Logger LOG = Logger.getLogger(GestorDescarga.class);
 
   @Override
   public void start(Stage primaryStage) {
@@ -27,13 +27,13 @@ public class Main extends Application {
 
     Parent root;
     try {
-      root = FXMLLoader.load(getClass().getResource("/com/rfm/application/SplashScreen.fxml"));
+      root = FXMLLoader.load(getClass().getResource("/view/SplashScreen.fxml"));
       Scene scene = new Scene(root, 600, 400);
       primaryStage.setTitle("Splash Screen");
       primaryStage.setResizable(false);
       primaryStage.setScene(scene);
       primaryStage.initStyle(StageStyle.TRANSPARENT);
-      primaryStage.getIcons().add(new Image(ClassLoader.getSystemResourceAsStream("resources/icon.png")));
+      primaryStage.getIcons().add(new Image(ClassLoader.getSystemResourceAsStream("view/images/icon.png")));
       primaryStage.show();
     } catch (IOException e) {
       LOG.error(e.getMessage());

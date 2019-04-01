@@ -23,7 +23,7 @@ public class GestorDescarga extends Application {
 
   @Override
   public void start(Stage primaryStage) throws IOException {
-    BasicConfigurator.configure();
+    
 
     Parent root;
     try {
@@ -34,6 +34,7 @@ public class GestorDescarga extends Application {
       primaryStage.initStyle(StageStyle.TRANSPARENT);
       primaryStage.getIcons().add(new Image(ClassLoader.getSystemResourceAsStream("view/images/icon.png")));
       primaryStage.show();
+      LOG.info("Ejecutando Splash Screen...");
     } catch (IOException e) {
       LOG.error(e.getMessage());
       throw e;
@@ -42,6 +43,7 @@ public class GestorDescarga extends Application {
   }
 
   public static void main(String[] args) {
+    BasicConfigurator.configure();
     launch(args);
   }
 }

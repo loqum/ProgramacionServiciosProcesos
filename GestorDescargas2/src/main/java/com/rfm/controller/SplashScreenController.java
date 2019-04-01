@@ -58,6 +58,8 @@ public class SplashScreenController implements Initializable {
 
           ventanaApp.show();
 
+          LOG.info("Ejecutando pantalla principal...");
+
         } catch (IOException e) {
           LOG.error("Error: " + e.getMessage());
         }

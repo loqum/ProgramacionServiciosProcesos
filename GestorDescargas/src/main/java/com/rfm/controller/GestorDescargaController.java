@@ -1,4 +1,4 @@
-package com.rfm.application;
+package com.rfm.controller;
 
 import java.io.File;
 
@@ -12,6 +12,7 @@ import java.util.prefs.Preferences;
 
 import org.apache.log4j.Logger;
 
+import com.rfm.application.TareaDescarga;
 import com.rfm.utils.Constants;
 import com.rfm.utils.Factory;
 import com.rfm.utils.FactoryMethod;
@@ -34,9 +35,9 @@ import javafx.stage.DirectoryChooser;
  * @author Ruben Fernandez Moreno
  */
 
-public class MainController implements Initializable {
+public class GestorDescargaController implements Initializable {
 
-  private static final Logger LOG = Logger.getLogger(MainController.class);
+  private static final Logger LOG = Logger.getLogger(GestorDescargaController.class);
 
   @FXML
   private Button botonDescargar;
@@ -150,7 +151,7 @@ public class MainController implements Initializable {
 
   public void abrirArchivoAction() {
 
-    try (Factory factory = FactoryMethod.getInstance(null)) {
+    try (Factory factory = FactoryMethod.getInstance()) {
 
       inputListaDescargas.setText(factory.readFile(Utils.openTxtFile()));
 
@@ -168,7 +169,7 @@ public class MainController implements Initializable {
 
     try {
 
-      Preferences preferences = Preferences.userNodeForPackage(MainController.class);
+      Preferences preferences = Preferences.userNodeForPackage(GestorDescargaController.class);
       preferences.clear();
       preferences.put("directorio", dir.getAbsolutePath());
 
@@ -182,7 +183,7 @@ public class MainController implements Initializable {
   public void descargarLista(ActionEvent actionEvent) {
     String directorio = null;
 
-    Preferences preferences = Preferences.userNodeForPackage(MainController.class);
+    Preferences preferences = Preferences.userNodeForPackage(GestorDescargaController.class);
     directorio = preferences.get("directorio", "C:\\Users\\");
 
     if (directorio != null) {
@@ -259,7 +260,7 @@ public class MainController implements Initializable {
 
     if (inputListaDescargas.getText() != null || !inputListaDescargas.getText().equals("")) {
 
-      try (Factory factory = FactoryMethod.getInstance(null)) {
+      try (Factory factory = FactoryMethod.getInstance()) {
 
         factory.writeFile(Utils.saveTxtFile(), inputListaDescargas.getText());
         Utils.successAlert();

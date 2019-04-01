@@ -2,7 +2,11 @@ package com.rfm.utils;
 
 public class FactoryMethod {
 
-  public static Factory getInstance(String instanceName) {
+  private FactoryMethod() {
+
+  }
+
+  public static Factory getInstance() {
     return new FactoryTxt();
   }
 
