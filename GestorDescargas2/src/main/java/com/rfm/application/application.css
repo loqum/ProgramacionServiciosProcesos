@@ -1,0 +1,71 @@
+.root {
+     -fx-background-image: url("descargas.png");
+}
+
+.button {
+    -fx-font-weight: bold;
+    -fx-background-color: rgba(0.0, 0.0, 0.0, 0.1);
+    -fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.6) , 5.0, 0.0 , 0.0 , 1.0 );
+}
+
+.button:hover {
+	-fx-background-color: rgba(0.0, 0.0, 0.0, 0.2);
+}
+
+.button:pressed {
+    -fx-background-color: rgba(0.0, 0.0, 0.0, 0.4);
+}
+
+.menu-bar {
+    -fx-background-color: rgba(0.0, 0.0, 0.0, 0.2);
+}
+
+.menu .label, .menu-item .label {
+    -fx-text-fill: #eee;
+}
+
+.menu .menu:hover, .menu:showing, .menu:hover {
+    -fx-background-color: rgba(0.0, 0.0, 0.0, 0.2);
+}
+
+
+.menu-item:hover, .menu-item:focused {
+    -fx-background-color: rgba(0.0, 0.0, 0.0, 0.4);
+}
+
+.context-menu {
+    -fx-background-color: rgba(0.0, 0.0, 0.0, 0.3);
+}
+
+.text-area .content {
+	-fx-background-color: #E3F2FD;
+
+}
+
+.text-field {
+	-fx-background-color: rgba(0.0, 0.0, 0.0, 0.1);
+    -fx-prompt-text-fill: white;
+    -fx-text-fill: white;
+}
+
+.progress-bar > .bar {
+    -fx-background-color: linear-gradient(
+        from 0.0px 0.75em to 0.75em 0.0px,
+        repeat,
+        -fx-accent 0.0%,
+        -fx-accent 49.0%,
+        derive(-fx-accent, 30.0%) 50.0%,
+        derive(-fx-accent, 30.0%) 99.0%
+    );
+}
+
+.progress-bar > .track {
+  -fx-text-box-border: rgba(0.0, 0.0, 0.0, 0.0);
+  -fx-control-inner-background: rgba(0.0, 0.0, 0.0, 0.0);
+}
+
+.progress-indicator .indicator {
+    -fx-background-color: rgba(0.0, 0.0, 0.0, 0.1);
+        -fx-progress-color: white;
+    
+}
