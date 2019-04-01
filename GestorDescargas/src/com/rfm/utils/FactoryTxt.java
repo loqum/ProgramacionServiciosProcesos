@@ -15,7 +15,6 @@ import com.rfm.application.MainController;
 public class FactoryTxt implements Factory, Serializable {
 
   private static final Logger LOG = Logger.getLogger(MainController.class);
-
   private static final long serialVersionUID = -3232282448273008017L;
 
   @Override

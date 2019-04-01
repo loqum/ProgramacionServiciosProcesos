@@ -88,7 +88,7 @@
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
                      <image>
-                        <Image url="@../../../resources/download.png" />
+                        <Image url="@../../../resources/file.png" />
                      </image>
                   </ImageView>
                </graphic>

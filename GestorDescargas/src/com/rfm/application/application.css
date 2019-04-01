@@ -43,18 +43,19 @@
 }
 
 .text-field {
-    -fx-background-color: rgba(0.0, 0.0, 0.0, 0.1);
+	-fx-background-color: rgba(0.0, 0.0, 0.0, 0.1);
+    -fx-prompt-text-fill: white;
     -fx-text-fill: white;
 }
 
 .progress-bar > .bar {
     -fx-background-color: linear-gradient(
-        from 0px .75em to .75em 0px,
+        from 0.0px 0.75em to 0.75em 0.0px,
         repeat,
-        -fx-accent 0%,
-        -fx-accent 49%,
-        derive(-fx-accent, 30%) 50%,
-        derive(-fx-accent, 30%) 99%
+        -fx-accent 0.0%,
+        -fx-accent 49.0%,
+        derive(-fx-accent, 30.0%) 50.0%,
+        derive(-fx-accent, 30.0%) 99.0%
     );
 }
 

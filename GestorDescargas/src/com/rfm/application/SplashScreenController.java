@@ -32,25 +32,26 @@ public class SplashScreenController implements Initializable {
 
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
+
+    
+
     FadeTransition transition = new FadeTransition(Duration.millis(3000), fondo);
     transition.setFromValue(-1);
     transition.setToValue(2);
-    transition.play();    
+    transition.play();
 
     transition.setOnFinished(new EventHandler<ActionEvent>() {
 
       @Override
       public void handle(ActionEvent event) {
 
-        
         try {
-          Stage ventana = (Stage) fondo.getScene().getWindow();
-          ventana.hide();
-          Stage ventanaApp = new Stage();
 
           Parent root = null;
           root = FXMLLoader.load(getClass().getResource("/com/rfm/application/Main.fxml"));
-
+          Stage ventana = (Stage) fondo.getScene().getWindow();
+          ventana.hide();
+          Stage ventanaApp = new Stage();
           Scene scene = new Scene(root, 600, 400);
           ventanaApp.setScene(scene);
           scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

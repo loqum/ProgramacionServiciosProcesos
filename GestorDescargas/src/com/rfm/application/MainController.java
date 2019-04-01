@@ -187,7 +187,7 @@ public class MainController implements Initializable {
 
     if (directorio != null) {
 
-      if (!(inputListaDescargas.getText().equals(null) || inputListaDescargas.getText().equals(""))) {
+      if (inputListaDescargas.getText() != null || inputListaDescargas.getText().equals("")) {
 
         String nombreArchivo = null;
         String nombreArchivoCompleto = null;
@@ -257,15 +257,20 @@ public class MainController implements Initializable {
 
   public void archivarEnlaces() {
 
-    try (Factory factory = FactoryMethod.getInstance(null)) {
+    if (inputListaDescargas.getText() != null || !inputListaDescargas.getText().equals("")) {
 
-      factory.writeFile(Utils.saveTxtFile(), inputListaDescargas.getText());
+      try (Factory factory = FactoryMethod.getInstance(null)) {
 
-    } catch (Exception e) {
-      LOG.error("Error: " + e.getMessage());
-    } finally {
-      Utils.successAlert();
+        factory.writeFile(Utils.saveTxtFile(), inputListaDescargas.getText());
+        Utils.successAlert();
+
+      } catch (Exception e) {
+
+        LOG.error("Error: " + e.getMessage());
+      }
+
     }
+
   }
 
 }
