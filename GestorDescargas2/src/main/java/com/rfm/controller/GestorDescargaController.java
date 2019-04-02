@@ -121,7 +121,7 @@ public class GestorDescargaController implements Initializable {
             inputUrl.setText(Constants.BLANK.getValue());
 
             sb.append("Archivo ".concat("'").concat(nombreFichero.substring(nombreFichero.lastIndexOf('\\') + 1))
-                .concat("'").concat(" descargado con éxito en ").concat("'").concat(nombreFichero).concat("'"))
+                .concat("'").concat(" descargado con Ã©xito en ").concat("'").concat(nombreFichero).concat("'"))
                 .append("\n");
 
             inputListaDescargas.setText(sb.toString());
@@ -132,7 +132,7 @@ public class GestorDescargaController implements Initializable {
 
         });
 
-        LOG.info("Descarga realizada con éxito");
+        LOG.info("Descarga realizada con ï¿½xito");
 
       } catch (MalformedURLException e) {
         LOG.error("Error: " + e.getMessage());
@@ -185,12 +185,12 @@ public class GestorDescargaController implements Initializable {
                   }
                 });
 
-            sb.append("Archivo ".concat("'").concat(nombreArchivo).concat("'").concat(" descargado con éxito en ")
+            sb.append("Archivo ".concat("'").concat(nombreArchivo).concat("'").concat(" descargado con ï¿½xito en ")
                 .concat("'").concat(directorio).concat("'")).append("\n");
 
           }
 
-          LOG.info("Archivo ".concat("'").concat(nombreArchivo).concat("'").concat(" descargado con éxito en ")
+          LOG.info("Archivo ".concat("'").concat(nombreArchivo).concat("'").concat(" descargado con ï¿½xito en ")
               .concat("'").concat(directorio).concat("'").concat("\n"));
 
         } catch (MalformedURLException e) {
