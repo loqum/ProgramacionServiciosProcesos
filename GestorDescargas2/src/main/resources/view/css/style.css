@@ -1,11 +1,16 @@
-.root {
-     -fx-background-image: url("../images/descargas.png");
+.anchorPaneMain {
+		
+-fx-background-color: #4ECDC4;  /* fallback for old browsers */
+-fx-background-color: -webkit-linear-gradient(to right, #556270, #4ECDC4);  /* Chrome 10-25, Safari 5.1-6 */
+-fx-background-color: linear-gradient(to right, #556270, #4ECDC4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	
+     /*-fx-background-image: url("../images/descargas.png");*/
 }
 
 .button {
     -fx-font-weight: bold;
+    -fx-text-fill: white;
     -fx-background-color: rgba(0.0, 0.0, 0.0, 0.1);
-    -fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.6) , 5.0, 0.0 , 0.0 , 1.0 );
 }
 
 .button:hover {

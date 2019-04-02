@@ -5,9 +5,9 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-import org.apache.log4j.Logger;
-
 import javafx.concurrent.Task;
+
+import org.apache.log4j.Logger;
 
 public class TareaDescarga extends Task<Void> implements Runnable {
 
@@ -36,12 +36,13 @@ public class TareaDescarga extends Task<Void> implements Runnable {
 
       byte[] array = new byte[1000];
       int leido = inputStream.read(array);
-      int max = leido;
+      int max = 0;
 
       while (leido > 0) {
         fileOutputStream.write(array, 0, leido);
         leido = inputStream.read(array);
-        this.updateProgress(++workDone, max);
+
+        this.updateProgress(++workDone, max++);
 
         if (Thread.currentThread().isInterrupted()) {
           LOG.info("Cancelando...");

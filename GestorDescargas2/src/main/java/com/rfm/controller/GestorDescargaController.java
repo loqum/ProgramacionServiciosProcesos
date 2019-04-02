@@ -1,13 +1,6 @@
 package com.rfm.controller;
 
 import java.io.File;
-
-import com.rfm.application.TareaDescarga;
-import com.rfm.utils.Constants;
-import com.rfm.utils.Factory;
-import com.rfm.utils.FactoryMethod;
-import com.rfm.utils.Utils;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -15,6 +8,14 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
+
+import org.apache.log4j.Logger;
+
+import com.rfm.application.TareaDescarga;
+import com.rfm.utils.Constants;
+import com.rfm.utils.Factory;
+import com.rfm.utils.FactoryMethod;
+import com.rfm.utils.Utils;
 
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
@@ -26,9 +27,8 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
-
-import org.apache.log4j.Logger;
 
 /**
  * @author Ruben Fernandez Moreno
@@ -37,6 +37,9 @@ import org.apache.log4j.Logger;
 public class GestorDescargaController implements Initializable {
 
   private static final Logger LOG = Logger.getLogger(GestorDescargaController.class);
+
+  @FXML
+  private AnchorPane anchorPaneMain;
 
   @FXML
   private Button botonDescargar;
@@ -80,6 +83,7 @@ public class GestorDescargaController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    anchorPaneMain.getStyleClass().add("anchorPaneMain");
 
   }
 
@@ -138,53 +142,11 @@ public class GestorDescargaController implements Initializable {
 
   }
 
-  public void borrarListaDescargas() {
-    Utils.deleteText(inputListaDescargas, sb);
-    inputUrl.setText(Constants.BLANK.getValue());
-    barraProgreso.setProgress(0);
-    indicadorProgreso.setProgress(0);
-  }
-
-  public void cerrarAppAction() {
-    Utils.confirmationAlert();
-  }
-
-  public void abrirArchivoAction() {
-
-    try (Factory factory = FactoryMethod.getInstance()) {
-
-      inputListaDescargas.setText(factory.readFile(Utils.openTxtFile()));
-
-    } catch (Exception e) {
-
-      LOG.error("Error al abrir o leer el archivo: " + e.getMessage());
-    }
-
-  }
-
-  public File seleccionarDirectorio() {
-    DirectoryChooser directoryChooser = new DirectoryChooser();
-    directoryChooser.setTitle("Selecciona un directorio...");
-    File dir = directoryChooser.showDialog(null);
-
-    try {
-
-      Preferences preferences = Preferences.userNodeForPackage(GestorDescargaController.class);
-      preferences.clear();
-      preferences.put("directorio", dir.getAbsolutePath());
-
-    } catch (BackingStoreException e) {
-      LOG.error("Error al guardar las preferencias: " + e.getMessage());
-    }
-
-    return dir;
-  }
-
   public void descargarLista() {
     String directorio = null;
 
     Preferences preferences = Preferences.userNodeForPackage(GestorDescargaController.class);
-    directorio = preferences.get("directorio", "C:\\Users\\");
+    directorio = preferences.get("directorio", null);
 
     if (directorio != null) {
 
@@ -239,26 +201,73 @@ public class GestorDescargaController implements Initializable {
           inputListaDescargas.setText(sb.toString());
         }
       } else {
-        Utils.emptyListAlert();
+        Utils.emptyListAlert(anchorPaneMain.getScene().getWindow());
       }
 
     } else {
-      Utils.pathFileAlert();
+      Utils.pathFileAlert(anchorPaneMain.getScene().getWindow());
     }
+  }
+
+  public void borrarListaDescargas() {
+    Utils.deleteText(inputListaDescargas, sb);
+    inputUrl.setText(Constants.BLANK.getValue());
+    barraProgreso.setProgress(0);
+    indicadorProgreso.setProgress(0);
+  }
+
+  public void cerrarAppAction() {
+    Utils.confirmationAlert(anchorPaneMain.getScene().getWindow());
+  }
+
+  public void abrirArchivoAction() {
+
+    try (Factory factory = FactoryMethod.getInstance()) {
+
+      inputListaDescargas.setText(factory.readFile(Utils.openTxtFile()));
+
+    } catch (Exception e) {
+
+      LOG.error("Error al abrir o leer el archivo: " + e.getMessage());
+    }
+
+  }
+
+  public File seleccionarDirectorio() {
+    DirectoryChooser directoryChooser = new DirectoryChooser();
+    directoryChooser.setTitle("Selecciona un directorio...");
+    File dir = directoryChooser.showDialog(null);
+
+    try {
+
+      Preferences preferences = Preferences.userNodeForPackage(GestorDescargaController.class);
+      preferences.clear();
+      preferences.put("directorio", dir.getAbsolutePath());
+
+    } catch (BackingStoreException e) {
+      LOG.error("Error al guardar las preferencias: " + e.getMessage());
+    }
+
+    return dir;
   }
 
   public void cancelarDescarga() {
 
-    try {
-      tareaDescarga.cancel(true);
-      barraProgreso.progressProperty().unbind();
-      indicadorProgreso.progressProperty().unbind();
-      barraProgreso.setProgress(0);
-      indicadorProgreso.setProgress(0);
+    if (tareaDescarga != null) {
+      
+      try {
+        tareaDescarga.cancel(true);
+        barraProgreso.progressProperty().unbind();
+        indicadorProgreso.progressProperty().unbind();
+        barraProgreso.setProgress(0);
+        indicadorProgreso.setProgress(0);
+        Utils.deleteText(inputListaDescargas, sb);
+        inputUrl.setText("");
 
-    } catch (RuntimeException e) {
-      LOG.error("Error: " + e.getLocalizedMessage());
-      throw e;
+      } catch (RuntimeException e) {
+        LOG.error("Error: " + e.getLocalizedMessage());
+        throw e;
+      }
     }
 
   }
@@ -270,7 +279,7 @@ public class GestorDescargaController implements Initializable {
       try (Factory factory = FactoryMethod.getInstance()) {
 
         factory.writeFile(Utils.saveTxtFile(), inputListaDescargas.getText());
-        Utils.successAlert();
+        Utils.successAlert(anchorPaneMain.getScene().getWindow());
 
       } catch (Exception e) {
 
@@ -278,7 +287,7 @@ public class GestorDescargaController implements Initializable {
       }
 
     } else {
-      Utils.emptyListAlert();
+      Utils.emptyListAlert(anchorPaneMain.getScene().getWindow());
     }
 
   }

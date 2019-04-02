@@ -11,6 +11,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 import javafx.stage.StageStyle;
+import javafx.stage.Window;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 /**
@@ -18,6 +19,10 @@ import javafx.stage.FileChooser.ExtensionFilter;
  */
 
 public class Utils {
+
+  private Utils() {
+    throw new IllegalStateException("Utility class");
+  }
 
   public static String saveFilesMultiTypes(String inputUrl) {
     FileChooser chooser = new FileChooser();
@@ -54,12 +59,12 @@ public class Utils {
 
   }
 
-  public static void confirmationAlert() {
+  public static void confirmationAlert(Window window) {
     Alert alert = new Alert(AlertType.CONFIRMATION);
     alert.setTitle(Constants.TITULO_VENTANA_CONFIRMACION.getValue());
     alert.setHeaderText(Constants.ENCABEZADO_VENTANA_CONFIRMACION.getValue());
     alert.setContentText(Constants.CONTENIDO_VENTANA_CONFIRMACION.getValue());
-    alert.initStyle(StageStyle.UTILITY);
+    alert.initOwner(window);
 
     Optional<ButtonType> result = alert.showAndWait();
 
@@ -69,29 +74,32 @@ public class Utils {
 
   }
 
-  public static void successAlert() {
+  public static void successAlert(Window window) {
     Alert alert = new Alert(AlertType.INFORMATION);
     alert.setTitle(Constants.TITULO_VENTANA_ALERTA_EXITO.getValue());
     alert.setContentText(Constants.CONTENIDO_VENTANA_ALERTA_EXITO.getValue());
     alert.initStyle(StageStyle.UTILITY);
+    alert.initOwner(window);
     alert.showAndWait();
   }
 
-  public static void pathFileAlert() {
+  public static void pathFileAlert(Window window) {
     Alert alert = new Alert(AlertType.WARNING);
     alert.setTitle(Constants.TITULO_VENTANA_ALERTA.getValue());
     alert.setHeaderText(Constants.ENCABEZADO_VENTANA_ALERTA.getValue());
     alert.setContentText(Constants.CONTENIDO_VENTANA_ALERTA.getValue());
     alert.initStyle(StageStyle.UTILITY);
+    alert.initOwner(window);
     alert.showAndWait();
   }
 
-  public static void emptyListAlert() {
+  public static void emptyListAlert(Window window) {
     Alert alert = new Alert(AlertType.WARNING);
     alert.setTitle(Constants.TITULO_VENTANA_ALERTA_VACIA.getValue());
     alert.setHeaderText(Constants.ENCABEZADO_VENTANA_ALERTA_VACIA.getValue());
     alert.setContentText(Constants.CONTENIDO_VENTANA_ALERTA_VACIA.getValue());
     alert.initStyle(StageStyle.UTILITY);
+    alert.initOwner(window);
     alert.showAndWait();
   }
 
