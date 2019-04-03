@@ -24,7 +24,7 @@ public class Utils {
     throw new IllegalStateException("Utility class");
   }
 
-  public static String saveFilesMultiTypes(String inputUrl) {
+  public static String saveFilesMultiTypes(String inputUrl, Window window) {
     FileChooser chooser = new FileChooser();
 
     chooser.getExtensionFilters().addAll(new ExtensionFilter("JPEG (*.jpg)", "*.jpeg"),
@@ -35,10 +35,10 @@ public class Utils {
     chooser.setInitialFileName(inputUrl);
     chooser.setTitle("Guardar como...");
 
-    return chooser.showSaveDialog(null).getAbsolutePath();
+    return chooser.showSaveDialog(window).getAbsolutePath();
   }
 
-  public static String saveTxtFile() {
+  public static String saveTxtFile(Window windows) {
     FileChooser chooser = new FileChooser();
 
     chooser.getExtensionFilters().addAll(new ExtensionFilter("TXT (*.txt)", "*.txt"));
@@ -48,7 +48,7 @@ public class Utils {
     return chooser.showSaveDialog(null).getAbsolutePath();
   }
 
-  public static String openTxtFile() {
+  public static String openTxtFile(Window window) {
     FileChooser chooser = new FileChooser();
 
     chooser.getExtensionFilters().addAll(new ExtensionFilter("TXT (*.txt)", "*.txt"));

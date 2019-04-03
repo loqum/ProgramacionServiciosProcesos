@@ -98,44 +98,51 @@ public class GestorDescargaController implements Initializable {
 
       int indiceUrl = inputUrl.getText().lastIndexOf('/');
 
-      String nombreFichero = Utils.saveFilesMultiTypes(inputUrl.getText().substring(indiceUrl + 1));
+      String nombreFichero = Utils.saveFilesMultiTypes(inputUrl.getText().substring(indiceUrl + 1),
+          anchorPaneMain.getScene().getWindow());
 
-      try {
-        url = new URL(inputUrl.getText());
-        tareaDescarga = new TareaDescarga(url, nombreFichero);
+      if (nombreFichero != null) {
 
-        barraProgreso.progressProperty().unbind();
-        indicadorProgreso.progressProperty().unbind();
+        try {
+          url = new URL(inputUrl.getText());
+          tareaDescarga = new TareaDescarga(url, nombreFichero);
 
-        barraProgreso.progressProperty().bind(tareaDescarga.progressProperty());
-        indicadorProgreso.progressProperty().bind(tareaDescarga.progressProperty());
+          barraProgreso.progressProperty().unbind();
+          indicadorProgreso.progressProperty().unbind();
 
-        new Thread(tareaDescarga).start();
+          barraProgreso.progressProperty().bind(tareaDescarga.progressProperty());
+          indicadorProgreso.progressProperty().bind(tareaDescarga.progressProperty());
 
-        tareaDescarga.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, new EventHandler<WorkerStateEvent>() {
+          new Thread(tareaDescarga).start();
 
-          @Override
-          public void handle(WorkerStateEvent t) {
-            barraProgreso.progressProperty().unbind();
-            indicadorProgreso.progressProperty().unbind();
-            inputUrl.setText(Constants.BLANK.getValue());
+          tareaDescarga.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, new EventHandler<WorkerStateEvent>() {
 
-            sb.append("Archivo ".concat("'").concat(nombreFichero.substring(nombreFichero.lastIndexOf('\\') + 1))
-                .concat("'").concat(" descargado con éxito en ").concat("'").concat(nombreFichero).concat("'"))
-                .append("\n");
+            @Override
+            public void handle(WorkerStateEvent t) {
+              barraProgreso.progressProperty().unbind();
+              indicadorProgreso.progressProperty().unbind();
+              inputUrl.setText(Constants.BLANK.getValue());
 
-            inputListaDescargas.setText(sb.toString());
+              sb.append(Constants.ARCHIVO.getValue().concat("'")
+                  .concat(nombreFichero.substring(nombreFichero.lastIndexOf('\\') + 1)).concat("'")
+                  .concat(Constants.DESCARGADO_EXITO.getValue()).concat("'").concat(nombreFichero).concat("'"))
+                  .append("\n");
 
-            LOG.info("Archivo ".concat("'").concat(nombreFichero.substring(nombreFichero.lastIndexOf('\\') + 1))
-                .concat("'").concat(" descargado con éxito en ").concat("'").concat(nombreFichero).concat("'"));
-          }
+              inputListaDescargas.setText(sb.toString());
 
-        });
+              LOG.info(Constants.ARCHIVO.getValue().concat("'")
+                  .concat(nombreFichero.substring(nombreFichero.lastIndexOf('\\') + 1)).concat("'")
+                  .concat(Constants.DESCARGADO_EXITO.getValue()).concat("'").concat(nombreFichero).concat("'"));
+            }
 
-        LOG.info("Descarga realizada con �xito");
+          });
 
-      } catch (MalformedURLException e) {
-        LOG.error("Error: " + e.getMessage());
+          LOG.info("Descarga realizada con �xito");
+
+        } catch (MalformedURLException e) {
+          LOG.error("Error: " + e.getMessage());
+        }
+
       }
 
     }
@@ -185,13 +192,13 @@ public class GestorDescargaController implements Initializable {
                   }
                 });
 
-            sb.append("Archivo ".concat("'").concat(nombreArchivo).concat("'").concat(" descargado con �xito en ")
-                .concat("'").concat(directorio).concat("'")).append("\n");
+            sb.append(Constants.ARCHIVO.getValue().concat("'").concat(nombreArchivo).concat("'")
+                .concat(Constants.DESCARGADO_EXITO.getValue()).concat("'").concat(directorio).concat("'")).append("\n");
 
           }
 
-          LOG.info("Archivo ".concat("'").concat(nombreArchivo).concat("'").concat(" descargado con �xito en ")
-              .concat("'").concat(directorio).concat("'").concat("\n"));
+          LOG.info(Constants.ARCHIVO.getValue().concat("'").concat(nombreArchivo).concat("'")
+              .concat(Constants.DESCARGADO_EXITO.getValue()).concat("'").concat(directorio).concat("'").concat("\n"));
 
         } catch (MalformedURLException e) {
           LOG.error("Error: " + e.getMessage());
@@ -224,7 +231,7 @@ public class GestorDescargaController implements Initializable {
 
     try (Factory factory = FactoryMethod.getInstance()) {
 
-      inputListaDescargas.setText(factory.readFile(Utils.openTxtFile()));
+      inputListaDescargas.setText(factory.readFile(Utils.openTxtFile(anchorPaneMain.getScene().getWindow())));
 
     } catch (Exception e) {
 
@@ -254,7 +261,7 @@ public class GestorDescargaController implements Initializable {
   public void cancelarDescarga() {
 
     if (tareaDescarga != null) {
-      
+
       try {
         tareaDescarga.cancel(true);
         barraProgreso.progressProperty().unbind();
@@ -278,7 +285,7 @@ public class GestorDescargaController implements Initializable {
 
       try (Factory factory = FactoryMethod.getInstance()) {
 
-        factory.writeFile(Utils.saveTxtFile(), inputListaDescargas.getText());
+        factory.writeFile(Utils.saveTxtFile(anchorPaneMain.getScene().getWindow()), inputListaDescargas.getText());
         Utils.successAlert(anchorPaneMain.getScene().getWindow());
 
       } catch (Exception e) {

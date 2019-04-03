@@ -8,9 +8,12 @@ public enum Constants {
   
   BLANK(""),
   
-  ENCABEZADO_VENTANA_CONFIRMACION("Atenci髇!"),
-  TITULO_VENTANA_CONFIRMACION("Ventana de confirmaci髇"),  
-  CONTENIDO_VENTANA_CONFIRMACION("縀st醩 seguro de que quieres salir del programa?"),
+  ARCHIVO("Archivo "),
+  DESCARGADO_EXITO(" descargado con 茅xito en "),
+  
+  ENCABEZADO_VENTANA_CONFIRMACION("Atenci贸n!"),
+  TITULO_VENTANA_CONFIRMACION("Ventana de confirmaci贸n"),  
+  CONTENIDO_VENTANA_CONFIRMACION("驴Est谩s seguro de que quieres salir del programa?"),
   
   TITULO_VENTANA_ALERTA("Alerta!"),
   ENCABEZADO_VENTANA_ALERTA("Antes de descargar debes seleccionar un lugar donde guardar los archivos"),
@@ -18,9 +21,9 @@ public enum Constants {
   
   TITULO_VENTANA_ALERTA_VACIA("Alerta!"),
   ENCABEZADO_VENTANA_ALERTA_VACIA("Antes debes seleccionar un archivo de texto (*.txt) que incluya los enlaces que deseas descargar"),
-  CONTENIDO_VENTANA_ALERTA_VACIA("Puedes seleccionar el archivo en cuesti髇 en Archivo - Seleccionar un archivo..."),
+  CONTENIDO_VENTANA_ALERTA_VACIA("Puedes seleccionar el archivo en cuesti贸n en Archivo - Seleccionar un archivo..."),
   
-  TITULO_VENTANA_ALERTA_EXITO("Informaci髇"),
+  TITULO_VENTANA_ALERTA_EXITO("Informaci贸n"),
   CONTENIDO_VENTANA_ALERTA_EXITO("Archivo generado correctamente en la ruta seleccionada");
   
   private final String value;
