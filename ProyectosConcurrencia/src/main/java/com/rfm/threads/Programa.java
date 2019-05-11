@@ -19,18 +19,25 @@ public class Programa {
         }
       });
       
-      Thread hilo1 = new Thread(tarea);
-      Thread hilo2 = new Thread(tareaDos);
+//      Thread hilo1 = new Thread(tarea);
+//      Thread hilo2 = new Thread(tareaDos);
+//      
+//      hilo2.start();
+//      hilo2.join();
+//      Thread.sleep(2000);
+//      hilo.start();
+//      hilo1.start();
+//      hilo1.join();
+//      Thread.sleep(2000);
+//      System.out.println("Soy el hilo principal");
+//      System.out.println("Fin del hilo principal");
       
-      hilo2.start();
-      hilo2.join();
-      Thread.sleep(2000);
-      hilo.start();
+      Thread hilo1 = new Thread(tarea);
+      
       hilo1.start();
       hilo1.join();
-      Thread.sleep(2000);
-      System.out.println("Soy el hilo principal");
-      System.out.println("Fin del hilo principal");
+      
+      System.out.println("Fin del hilo");
 
       
 
