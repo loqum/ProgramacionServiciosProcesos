@@ -47,6 +47,10 @@ public class Client {
   public boolean isConnected() {
     return !socket.isClosed();
   }
+  
+  public void close() throws IOException {
+    socket.close();
+  }
 
   public long getIdClient() {
     return idClient;

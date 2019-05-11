@@ -1,0 +1,95 @@
+2019-05-11 10:40:00 INFO  ConnectionClient:21 - Bienvenido, Cliente 0
+2019-05-11 10:40:03 INFO  ConnectionClient:21 - Bienvenido, Cliente 1
+2019-05-11 10:40:25 INFO  Server:53 - Client 0: hola
+2019-05-11 10:40:26 INFO  Server:53 - Client 0: hola
+2019-05-11 10:40:39 INFO  Server:53 - Client 1: null
+2019-05-11 10:40:41 INFO  Server:53 - Client 1: null
+2019-05-11 10:40:52 INFO  Server:53 - Client 1: null
+2019-05-11 10:41:08 INFO  Server:53 - Client 1: null
+2019-05-11 10:41:12 INFO  Server:53 - Client 1: null
+2019-05-11 10:41:13 INFO  Server:53 - Client 1: null
+2019-05-11 10:41:30 INFO  Server:53 - Client 1: null
+2019-05-11 10:41:33 ERROR ConnectionClient:29 - Error: Connection reset
+2019-05-11 10:41:34 INFO  Server:53 - Client 1: null
+2019-05-11 10:41:38 INFO  Server:53 - Client 1: null
+2019-05-11 10:41:39 INFO  Server:53 - Client 1: null
+2019-05-11 10:42:18 INFO  ConnectionClient:21 - Bienvenido, Cliente 0
+2019-05-11 10:42:27 INFO  Server:53 - Client 0: hola
+2019-05-11 11:02:35 INFO  ConnectionClient:21 - Bienvenido, Cliente 0
+2019-05-11 11:02:41 INFO  ConnectionClient:21 - Bienvenido, Cliente 1
+2019-05-11 11:02:43 INFO  Server:53 - Client 1: hola
+2019-05-11 11:02:43 INFO  Server:53 - Client 1: hola
+2019-05-11 11:02:46 INFO  Server:53 - Client 0: hola
+2019-05-11 11:02:46 INFO  Server:53 - Client 0: hola
+2019-05-11 11:02:59 INFO  Server:53 - Client 0: salir
+2019-05-11 11:02:59 INFO  Server:53 - Client 0: salir
+2019-05-11 11:03:45 INFO  ConnectionClient:21 - Bienvenido, Cliente 0
+2019-05-11 11:03:47 INFO  Server:53 - Client 0: c
+2019-05-11 11:03:52 INFO  Server:53 - Client 0: ‡c
+2019-05-11 11:34:40 INFO  ConnectionClient:21 - Bienvenido, Cliente 0
+Para finalizar la sesión escribir '/out/'.
+2019-05-11 11:34:50 INFO  ConnectionClient:21 - Bienvenido, Cliente 1
+Para finalizar la sesión escribir '/out/'.
+2019-05-11 11:35:13 INFO  Server:51 - Client 0: hola
+2019-05-11 11:35:13 INFO  Server:51 - Client 0: hola
+2019-05-11 11:35:20 INFO  Server:51 - Client 1: hola, cliente 1
+2019-05-11 11:35:20 INFO  Server:51 - Client 1: hola, cliente 1
+2019-05-11 11:35:31 INFO  Server:51 - Client 0: hola, soy el cliente 0
+2019-05-11 11:35:31 INFO  Server:51 - Client 0: hola, soy el cliente 0
+2019-05-11 11:35:37 INFO  Server:51 - Client 0: adios
+2019-05-11 11:35:37 INFO  Server:51 - Client 0: adios
+2019-05-11 11:35:58 INFO  Server:51 - Client 0: as/out/
+2019-05-11 11:35:58 INFO  Server:51 - Client 0: as/out/
+2019-05-11 11:36:04 INFO  Server:51 - Client 0: /out/
+2019-05-11 11:36:04 INFO  Server:51 - Client 0: /out/
+2019-05-11 11:36:04 ERROR Main:31 - Errorsocket closed
+2019-05-11 11:36:08 INFO  Server:51 - Client 0: ds
+2019-05-11 11:36:08 INFO  Server:51 - Client 0: ds
+2019-05-11 11:36:15 INFO  Server:51 - Client 0: /out/
+2019-05-11 11:36:15 INFO  Server:51 - Client 0: /out/
+2019-05-11 11:36:19 INFO  Server:51 - Client 0: -out
+2019-05-11 11:36:19 INFO  Server:51 - Client 0: -out
+2019-05-11 11:36:43 INFO  ConnectionClient:21 - Bienvenido, Cliente 0
+Para finalizar la sesion escribir '/out/'.
+2019-05-11 11:36:48 INFO  Server:51 - Client 0: /out/
+2019-05-11 11:36:52 ERROR Main:31 - Errorsocket closed
+2019-05-11 11:37:04 INFO  Server:51 - Client 0: /out/
+2019-05-11 11:37:47 INFO  Server:51 - Client 0: [A[A[A/out/
+2019-05-11 11:38:08 INFO  Server:51 - Client 0: /[B[B[B
+2019-05-11 11:38:09 INFO  Server:51 - Client 0: 
+2019-05-11 11:38:10 INFO  Server:51 - Client 0: 
+2019-05-11 11:38:12 INFO  Server:51 - Client 0: 
+2019-05-11 11:38:12 INFO  Server:51 - Client 0: 
+2019-05-11 11:38:12 INFO  Server:51 - Client 0: /out/
+2019-05-11 11:38:26 INFO  Server:51 - Client 0: ssdccf
+2019-05-11 11:38:34 INFO  Server:51 - Client 0: 
+2019-05-11 11:39:42 INFO  Server:51 - Client 0: 
+2019-05-11 11:39:45 INFO  Server:51 - Client 0: 
+2019-05-11 11:39:46 INFO  Server:51 - Client 0: 
+2019-05-11 11:39:58 INFO  Server:51 - Client 0: /out/
+2019-05-11 11:41:27 INFO  ConnectionClient:21 - Bienvenido, Cliente 0
+Para finalizar la sesion escribir '/out/'.
+2019-05-11 11:41:35 INFO  Server:51 - Client 0: /out/
+2019-05-11 11:41:54 INFO  ConnectionClient:21 - Bienvenido, Cliente 0
+Para finalizar la sesion escribir '/out/'.
+2019-05-11 11:42:00 INFO  Server:51 - Client 0: /out/
+2019-05-11 11:43:31 ERROR Main:31 - ErrorAddress already in use: JVM_Bind
+2019-05-11 11:43:45 INFO  ConnectionClient:21 - Bienvenido, Cliente 0
+Para finalizar la sesion escribir '/out/'.
+2019-05-11 11:43:52 INFO  ConnectionClient:21 - Bienvenido, Cliente 1
+Para finalizar la sesion escribir '/out/'.
+2019-05-11 11:44:03 INFO  Server:51 - Client 0: 	cliente hola soy el cliente 0
+2019-05-11 11:44:03 INFO  Server:51 - Client 0: 	cliente hola soy el cliente 0
+2019-05-11 11:44:14 INFO  Server:51 - Client 1: hp¤aola, cliente 90, soy el cliente 1
+2019-05-11 11:44:14 INFO  Server:51 - Client 1: hp¤aola, cliente 90, soy el cliente 1
+2019-05-11 11:44:22 INFO  Server:51 - Client 1: me marcho ya
+2019-05-11 11:44:22 INFO  Server:51 - Client 1: me marcho ya
+2019-05-11 11:44:24 INFO  Server:51 - Client 1: adiosï
+2019-05-11 11:44:24 INFO  Server:51 - Client 1: adiosï
+2019-05-11 11:44:28 INFO  Server:51 - Client 1: /out/
+2019-05-11 11:44:28 INFO  Server:51 - Client 1: /out/
+2019-05-11 11:44:28 INFO  Server:51 - Client 1: finalizo la conexion.
+2019-05-11 11:44:28 INFO  Server:51 - Client 1: finalizo la conexion.
+2019-05-11 11:44:28 INFO  ConnectionClient:32 - El cliente finalizó la conexión
+2019-05-11 11:44:39 INFO  Server:51 - Client 0: vaya
+2019-05-11 11:44:39 INFO  Server:51 - Client 0: vaya

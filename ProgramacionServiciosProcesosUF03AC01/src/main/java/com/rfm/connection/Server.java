@@ -6,8 +6,11 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 public class Server {
 
+  private static final Logger LOG = Logger.getLogger(Server.class);
   private ServerSocket serverSocket;
   private int port;
   private List<Client> clients;
@@ -45,6 +48,7 @@ public class Server {
 
     for (Client client : clients) {
       client.getOut().println(message);
+      LOG.info(message);
 
     }
   }
